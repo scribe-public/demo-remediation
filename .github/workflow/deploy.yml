@@ -1,0 +1,36 @@
+name: Scribe Discover
+
+on:
+  # End of pipeline.yml
+    workflow_run:
+      workflows: ["Run Pipeline"]  # Matches the name of the first workflow
+      types:
+      - completed  # Triggers when the workflow completes (successful or failed)
+
+
+jobs:
+
+  evidnece_and_policy_scm:
+  runs-on: ubuntu-latest
+  name: Evidence and Policy - Github
+    uses: scribe-public/reusable-workflows/.github/workflows/github-demo.yaml@main
+    with:
+        scribe_product_name: "Astro-Analytics"
+        scribe_product_version: "1.0"
+    secrets: 
+        SCRIBE_TOKEN: ${{ secrets.SCRIBE_GOLD_TEAM_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  deploy-and-discover:
+    runs-on: ubuntu-latest
+    depends-on: build-pipeline
+    name: Discover and Evaluate K8s
+    uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
+    with:
+        scribe_product_name: "Astro-Analytics"
+        scribe_product_version: "1.0"
+        targets: "scribesecurity/demo-pipeline:latest, nginx:latest"
+    secrets: 
+        SCRIBE_TOKEN: ${{ secrets.SCRIBE_GOLD_TEAM_TOKEN }}
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
