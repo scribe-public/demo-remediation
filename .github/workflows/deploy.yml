@@ -1,4 +1,4 @@
-name: Scribe Discover
+name: Scribe K8S Discover
 
 on:
   # End of pipeline.yml
