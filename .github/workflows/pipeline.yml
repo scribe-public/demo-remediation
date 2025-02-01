@@ -21,7 +21,7 @@ jobs:
       with:
         tags: scribesecurity/astro-analytics:latest
         context: .
-        push: false
+        push: true
 
 
       
