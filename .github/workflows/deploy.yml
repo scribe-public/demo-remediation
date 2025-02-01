@@ -10,20 +10,7 @@ on:
 
 
 jobs:
-
-  evidnece_and_policy_scm:
-    name: Evidence and Policy - Github
-  
-    uses: scribe-public/reusable-workflows/.github/workflows/github-demo.yaml@main
-    with:
-        scribe_product_name: "Astro-Analytics"
-        scribe_product_version: "1.0"
-    secrets: 
-        SCRIBE_TOKEN: ${{ secrets.SCRIBE_GOLD_TEAM_TOKEN }}
-        GH_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
-
   deploy-and-discover:
-    needs: evidnece_and_policy_scm
     name: Discover and Evaluate K8s
     uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
     with:
