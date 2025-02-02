@@ -11,12 +11,13 @@ on:
 
 jobs:
   deploy-and-discover:
+     
     name: Discover and Evaluate K8s
     uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
     with:
         scribe_product_name: "Astro-Analytics"
-        scribe_product_version: "1.0"
-        targets: "scribesecurity/astro-analytics:latest, nginx:latest"
+        scribe_product_version: ${{ vars.VERSION }}
+        targets: "scribesecurity/astro-analytics:latest"
     secrets: 
         SCRIBE_TOKEN: ${{ secrets.SCRIBE_GOLD_TEAM_TOKEN }}
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}

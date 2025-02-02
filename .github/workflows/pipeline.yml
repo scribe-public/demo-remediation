@@ -19,7 +19,7 @@ jobs:
     - name: Build Image
       uses: docker/build-push-action@v2
       with:
-        tags: scribesecurity/astro-analytics:latest
+        tags: scribesecurity/astro-analytics:latest, scribesecurity/astro-analytics:${{ vars.VERSION }}
         context: .
         push: true
 
