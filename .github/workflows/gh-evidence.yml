@@ -20,18 +20,5 @@ jobs:
         scribe_product_name: "Astro-Analytics"
         scribe_product_version: ${{ vars.VERSION }}
     secrets: 
-        SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
+        SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         GH_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
-
-#   deploy-and-discover:
-#     needs: evidnece_and_policy_scm
-#     name: Discover and Evaluate K8s
-#     uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
-#     with:
-#         scribe_product_name: "Astro-Analytics"
-#         scribe_product_version: "1.0"
-#         targets: "scribesecurity/demo-pipeline:latest, nginx:latest"
-#     secrets: 
-#         SCRIBE_TOKEN: ${{ secrets.SCRIBE_GOLD_TEAM_TOKEN }}
-#         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-#         DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
