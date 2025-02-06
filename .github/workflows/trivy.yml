@@ -1,0 +1,57 @@
+name: Upload 3rd party evidence
+
+on:
+  # End of pipeline.yml
+    workflow_dispatch:
+    # workflow_run:
+    #   workflows: ["Run Pipeline"]  # Matches the name of the first workflow
+    #   types:
+    #   - completed  # Triggers when the workflow completes (successful or failed)
+
+
+jobs:
+  deploy-and-discover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: install trivy
+        run: |
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.55.2/trivy_0.55.2_Linux-64bit.deb
+          sudo dpkg -i trivy_0.55.2_Linux-64bit.deb
+          trivy -h
+      - name: create report name
+        run: |
+          REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | cut -d'/' -f2)
+          echo ${{ github.ref_name}}
+          BRANCH_NAME=$(echo "${{ github.ref_name}}" | sed 's/\//-/g')
+          echo "FILENAME=${BRANCH_NAME}--${REPO_NAME}-secret-scan.sarif" >> $GITHUB_ENV
+          echo ${{ env.FILENAME }}
+  
+      - name: Run Trivy
+        run: |
+          trivy fs --scanners secret --severity CRITICAL,HIGH --format sarif --exit-code 0 -o ${{ env.FILENAME }} . ${{ env.EXCLUDE_ARGS }}
+  
+      - name: upload evidence as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: ${{ env.FILENAME }}
+          name: secret-scan
+          
+      - name: install valint
+        uses: scribe-security/action-installer@master
+  
+      - name: create evidence
+        run: | 
+           valint evidence  ${{ env.FILENAME}} --label ${{env.FILENAME}}  -P ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN}} --product-key ""Astro-Analytics"" --product-version ${{vars.VERSION}} --parser trivy
+  
+
+    # - name: evaluate policy
+    #   run: >-
+    #     valint verify 
+    #     -P ${{ secrets.SCRIBE_TOKEN}}
+    #     --bundle https://github.com/scribe-security/dogfooding-policies --bundle-branch main --bundle-auth ${{ secrets.DOGFOODING_POLICY_ACCESS}} 
+    #     --policy secret-scan@policies --rule-args att_name=${{env.FILENAME}}
+    #     --product-key ${{inputs.scribe_product_name}} --product-version ${{inputs.scribe_product_version}}
+
+
