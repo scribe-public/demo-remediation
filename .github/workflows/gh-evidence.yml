@@ -19,6 +19,8 @@ jobs:
         scribe_valint_url: "https://api.scribesecurity.com"
         scribe_product_name: "Astro-Analytics"
         scribe_product_version: ${{ vars.VERSION }}
+        discover_args: "--commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs"
+
     secrets: 
         SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         GH_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
