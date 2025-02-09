@@ -16,7 +16,7 @@ jobs:
   
     uses: scribe-public/reusable-workflows/.github/workflows/github-demo.yaml@main
     with:
-        scribe_valint_url: "https://api.staging.scribesecurity.com"
+        scribe_valint_url: "https://api.scribesecurity.com"
         scribe_product_name: "Astro-Analytics"
         scribe_product_version: ${{ vars.VERSION }}
     secrets: 
