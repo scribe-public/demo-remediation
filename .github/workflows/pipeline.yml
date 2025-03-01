@@ -23,12 +23,6 @@ jobs:
         context: .
         push: true
 
-    - name: Create and Upload SBOM
-      uses: scribe-security/action-bom@master
-      with:
-        scribe_product_name: "Astro-Analytics"
-        scribe_product_version: ${{ vars.VERSION }}
-
 
 
       
