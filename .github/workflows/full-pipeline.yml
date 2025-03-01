@@ -1,0 +1,71 @@
+name: Full Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-pipeline:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/astro-analytics:latest
+            ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
+
+      - name: Create and Upload SBOM
+        uses: scribe-security/action-bom@master
+        env: 
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+        with:
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
+          product-key: "Astro-Analytics"
+          product-version: ${{ vars.VERSION }}
+          base-image: Dockerfile
+
+    
+  create-gh-evidence:
+    name: Discover and Policy - Github
+    needs: build-pipeline
+    uses: scribe-public/reusable-workflows/.github/workflows/github-demo.yaml@main
+    with:
+        scribe_valint_url: "https://api.scribesecurity.com"
+        scribe_product_name: "Astro-Analytics"
+        scribe_product_version: ${{ vars.VERSION }}
+        discover_args: "--commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs"
+    
+    secrets: 
+        SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+        GH_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
+
+  deploy-and-create-evidence:
+    name: Discover K8s
+    needs: build-pipeline
+    uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
+    with:
+        scribe_valint_url: "https://api.scribesecurity.com"
+        scribe_product_name: "Astro-Analytics"
+        scribe_product_version: ${{ vars.VERSION }}
+        targets: "scribesecurity/astro-analytics:latest"
+        docker-registry: ghcr.io
+    secrets: 
+        SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+        DOCKERHUB_USERNAME: ${{ github.actor }}
+        DOCKERHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        
