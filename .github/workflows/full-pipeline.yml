@@ -62,7 +62,8 @@ jobs:
         scribe_valint_url: "https://api.scribesecurity.com"
         scribe_product_name: "Astro-Analytics"
         scribe_product_version: ${{ vars.VERSION }}
-        targets: "scribesecurity/astro-analytics:latest"
+        targets: ghcr.io/scribe-public/astro-analytics:latest
+        sbom: false
         docker-registry: ghcr.io
     secrets: 
         SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
