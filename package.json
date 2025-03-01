@@ -1,0 +1,14 @@
+{
+    "name": "Astro-Analytics",
+    "version": "1.0.0",
+    "description": "Your project description",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "systeminformation": "5.3.0"
+    },
+    "author": "Lazy Joe",
+    "license": "MIT"
+  }
