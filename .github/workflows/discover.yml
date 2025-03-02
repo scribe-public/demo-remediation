@@ -2,7 +2,6 @@ name: Discover (agentless) Pipeline
 
 on:
   workflow_dispatch:
-  push:
 
 env:
   PRODUCT_NAME: "Astro-Analytics-Discovery"
@@ -19,29 +18,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Discover Github
-      #   uses: scribe-security/action-platforms@dev
-      #   with:
-      #     command: discover
-      #     platform: github
-      #     args: >-
-      #       --token ${{ secrets.DEMO_GH_SECRET}}
-      #       --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
-      #       --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
-      #       --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
+      - name: Discover Github
+        uses: scribe-security/action-platforms@dev
+        with:
+          command: discover
+          platform: github
+          args: >-
+            --token ${{ secrets.DEMO_GH_SECRET}}
+            --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
             
 
-      # - name: Verify Github
-      #   uses: scribe-security/action-platforms@dev
-      #   with:
-      #     command: verify
-      #     platform: github
-      #     valint_args: --valint.bundle-branch sh-5883-ssdf
-      #     args: >-
-      #       --organization.mapping *${{ github.repository_owner}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
-      #       --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
-      #       --repository.policy ssdf-repo@discovery
-      #       --repo-policy-skip-aggregate
+      - name: Verify Github
+        uses: scribe-security/action-platforms@dev
+        with:
+          command: verify
+          platform: github
+          valint_args: --valint.bundle-branch sh-5883-ssdf
+          args: >-
+            --organization.mapping *${{ github.repository_owner}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.policy ssdf-repo@discovery
+            --repo-policy-skip-aggregate
 
   k8s-evidence:
     name: Discover K8s
