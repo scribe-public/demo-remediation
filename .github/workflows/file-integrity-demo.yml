@@ -13,7 +13,7 @@ jobs:
       contents: read
     env:
       DOCKER_DRIVER: overlay2
-      DOCKER_CONFIG: $HOME/.docker
+      # DOCKER_CONFIG: ${{ 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -61,7 +61,7 @@ jobs:
           cat /home/runner/.docker/config.json || true
 
           ls -lh /home/runner/work/demo-pipeline/demo-pipeline/
-          
+
           find /home/runner/ -name config.json || true
           echo "$HOME/.docker" || true
 
