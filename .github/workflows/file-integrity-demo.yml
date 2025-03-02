@@ -34,24 +34,24 @@ jobs:
       # - name: Pull latest image
       #   run: docker pull ghcr.io/${{ github.repository_owner }}/astro-analytics:latest 
       
-      # - name: Build and push fixed image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: .
-      #     push: true
-      #     tags: |
-      #       ghcr.io/${{ github.repository_owner }}/astro-analytics:fixed
+      - name: Build and push fixed image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/astro-analytics:fixed
 
-      # - name: Create and Upload SBOM of the Version
-      #   uses: scribe-security/action-bom@master
-      #   env: 
-      #       SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-      #   with:
-      #     target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:fixed"
-      #     product-key: "Astro-Analytics-File-Integrity"
-      #     product-version: "Fixed"
-      #     components: files
-      #     label: "fixed-file-level-sbom"
+      - name: Create and Upload SBOM of the Version
+        uses: scribe-security/action-bom@master
+        env: 
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+        with:
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:fixed"
+          product-key: "Astro-Analytics-File-Integrity"
+          product-version: "Fixed"
+          components: files
+          label: "fixed-file-level-sbom"
 
       - name: INFO find config
         run: |
@@ -67,7 +67,6 @@ jobs:
         uses: scribe-security/action-bom@dev
         env: 
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-          DEBUG: "true"
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
           product-key: "Astro-Analytics-File-Integrity"
