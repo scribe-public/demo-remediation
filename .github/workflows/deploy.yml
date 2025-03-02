@@ -16,7 +16,7 @@ jobs:
     uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
     with:
         scribe_valint_url: "https://api.scribesecurity.com"
-        scribe_product_name: "Astro-Analytics"
+        scribe_product_name: "Astro-Analytics-Deployment"
         scribe_product_version: ${{ vars.VERSION }}
         targets: "scribesecurity/astro-analytics:latest"
     secrets: 

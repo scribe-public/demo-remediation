@@ -2,8 +2,6 @@ name: File Integrity Demo
 
 on:
   workflow_dispatch:
-  push:
-
 
 jobs:
   build-pipeline:
