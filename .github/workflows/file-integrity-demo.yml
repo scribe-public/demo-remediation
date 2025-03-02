@@ -53,6 +53,8 @@ jobs:
         run: |
           ls -lh /home/runner/.docker || true
           cat /home/runner/.docker/config.json || true
+          find /home/runner/work/_temp/_github_home -name config.json || true
+          ls -lha /home/runner/work/_temp/_github_home || true
 
       - name: Create and Upload SBOM of latest (not fixed) Version
         uses: scribe-security/action-bom@dev
