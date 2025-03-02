@@ -55,11 +55,14 @@ jobs:
           cat /home/runner/.docker/config.json || true
           find /home/runner/work/_temp/_github_home -name config.json || true
           ls -lha /home/runner/work/_temp/_github_home || true
+          echo "$HOME/.docker"
 
       - name: Create and Upload SBOM of latest (not fixed) Version
         uses: scribe-security/action-bom@dev
         env: 
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+          # DOCKER_CONFIG: $HOME/.docker
+          DEBUG: "true"
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
           product-key: "Astro-Analytics-File-Integrity"
