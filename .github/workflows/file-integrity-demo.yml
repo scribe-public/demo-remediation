@@ -43,7 +43,7 @@ jobs:
             SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:fixed"
-          product-key: "Astro-Analytics"
+          product-key: "Astro-Analytics-File-Integrity"
           product-version: "Fixed"
           components: files
           label: "fixed-file-level-sbom"
@@ -54,7 +54,7 @@ jobs:
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
-          product-key: "Astro-Analytics"
+          product-key: "Astro-Analytics-File-Integrity"
           product-version: ${{ vars.VERSION }}
           components: files
           label: "latest-file-level-sbom"
