@@ -59,6 +59,9 @@ jobs:
         run: |
           ls -lh /home/runner/.docker || true
           cat /home/runner/.docker/config.json || true
+
+          ls -lh /home/runner/work/demo-pipeline/demo-pipeline/
+          
           find /home/runner/ -name config.json || true
           echo "$HOME/.docker" || true
 
