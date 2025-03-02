@@ -18,7 +18,7 @@ jobs:
         scribe_valint_url: "https://api.scribesecurity.com"
         scribe_product_name: "Astro-Analytics-Deployment"
         scribe_product_version: ${{ vars.VERSION }}
-        targets: "scribesecurity/astro-analytics:latest"
+        targets: nginx:latest #"scribesecurity/astro-analytics:latest"
     secrets: 
         SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
