@@ -55,7 +55,7 @@ jobs:
           cat /home/runner/.docker/config.json || true
 
       - name: Create and Upload SBOM of latest (not fixed) Version
-        uses: scribe-security/action-bom@master
+        uses: scribe-security/action-bom@dev
         env: 
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         with:
@@ -64,4 +64,5 @@ jobs:
           product-version: ${{ vars.VERSION }}
           components: files
           label: "latest-file-level-sbom"
+          verbose: true
   
