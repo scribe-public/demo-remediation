@@ -66,5 +66,5 @@ jobs:
           product-version: ${{ vars.VERSION }}
           components: files
           label: "latest-file-level-sbom"
-          verbose: true
+          verbose: 2
   
