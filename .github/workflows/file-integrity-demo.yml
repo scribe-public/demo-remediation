@@ -2,6 +2,7 @@ name: File Integrity Demo
 
 on:
   workflow_dispatch:
+  push:
 
 jobs:
   build-pipeline:
@@ -20,7 +21,7 @@ jobs:
           mv package.json.tmp package.json
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
