@@ -13,7 +13,7 @@ jobs:
       contents: read
     env:
       DOCKER_DRIVER: overlay2
-      # DOCKER_CONFIG: ${{ 
+      DOCKER_CONFIG: ${{ github.workspace }}/.docker
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
