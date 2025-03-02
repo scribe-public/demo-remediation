@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   push:
 
+env:
+  DOCKER_DRIVER: overlay2
+  DOCKER_CONFIG: $HOME/.docker
+
 jobs:
   build-pipeline:
     runs-on: ubuntu-latest
@@ -54,15 +58,13 @@ jobs:
         run: |
           ls -lh /home/runner/.docker || true
           cat /home/runner/.docker/config.json || true
-          find /home/runner/work/_temp/_github_home -name config.json || true
-          ls -lha /home/runner/work/_temp/_github_home || true
-          echo "$HOME/.docker"
+          find /home/runner/ -name config.json || true
+          echo "$HOME/.docker" || true
 
       - name: Create and Upload SBOM of latest (not fixed) Version
         uses: scribe-security/action-bom@dev
         env: 
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-          DOCKER_CONFIG: $HOME/.docker
           DEBUG: "true"
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
