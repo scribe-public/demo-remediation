@@ -2,6 +2,7 @@ name: Discover (agentless) Pipeline
 
 on:
   workflow_dispatch:
+  push:
 
 env:
   PRODUCT_NAME: "Astro-Analytics-Discovery"
