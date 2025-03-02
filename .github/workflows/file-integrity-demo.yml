@@ -41,7 +41,7 @@ jobs:
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:fixed"
           product-key: "Astro-Analytics"
-          product-version: "1.2"
+          product-version: "Fixed"
           components: files
           label: "fixed-file-level-sbom"
 
