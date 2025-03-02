@@ -62,7 +62,7 @@ jobs:
         uses: scribe-security/action-bom@dev
         env: 
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-          # DOCKER_CONFIG: $HOME/.docker
+          DOCKER_CONFIG: $HOME/.docker
           DEBUG: "true"
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
