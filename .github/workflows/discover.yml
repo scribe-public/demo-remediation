@@ -3,27 +3,52 @@ name: Discover (agentless) Pipeline
 on:
   workflow_dispatch:
 
-jobs: 
-  create-gh-evidence:
-    name: Discover and Policy - Github
-    uses: scribe-public/reusable-workflows/.github/workflows/github-demo.yaml@main
-    with:
-        scribe_valint_url: "https://api.scribesecurity.com"
-        scribe_product_name: "Astro-Analytics-Discovery"
-        scribe_product_version: ${{ vars.VERSION }}
-        discover_args: "--commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs"
-    
-    secrets: 
-        SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-        GH_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
+env:
+  PRODUCT_NAME: "Astro-Analytics-Discovery"
+  PRODUCT_VERSION: ${{ vars.VERSION }}
 
-  deploy-and-create-evidence:
+jobs: 
+  github-evidence:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_EXTERNAL_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Discover Github
+        uses: scribe-security/action-platforms@dev
+        with:
+          command: discover
+          platform: github
+          args: >-
+            --token ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN}}
+            --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
+            
+
+      - name: Verify Github
+        uses: scribe-security/action-platforms@dev
+        with:
+          command: verify
+          platform: github
+          valint_args: --valint.bundle-branch sh-5883-ssdf
+          args: >-
+            --organization.mapping *${{ github.repository_owner}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.policy ssdf-repo@discovery
+            --repo-policy-skip-aggregate
+
+  k8s-evidence:
     name: Discover K8s
     uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
     with:
         scribe_valint_url: "https://api.scribesecurity.com"
         scribe_product_name: "Astro-Analytics-Discovery"
-        scribe_product_version: ${{ vars.VERSION }}
+        scribe_product_version: "${{ vars.VERSION }}"
         targets: ghcr.io/scribe-public/astro-analytics:latest
         docker-registry: ghcr.io
         sbom: true
