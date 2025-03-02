@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   push:
 
-env:
-  DOCKER_DRIVER: overlay2
-  DOCKER_CONFIG: $HOME/.docker
 
 jobs:
   build-pipeline:
@@ -14,6 +11,9 @@ jobs:
     permissions:
       packages: write
       contents: read
+    env:
+      DOCKER_DRIVER: overlay2
+      DOCKER_CONFIG: $HOME/.docker
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -52,6 +52,7 @@ jobs:
       #     product-version: "Fixed"
       #     components: files
       #     label: "fixed-file-level-sbom"
+
 
 
       - name: INFO find config
