@@ -78,7 +78,6 @@ jobs:
           bundle-branch: draft-sp-800-190
           initiative: v2/initiatives/sp-800-190.yaml
           allow-unicode: true
-          payload: scribe-policy-result.sarif
           input: sarif:trivy-report.sarif
           verbose: 2
         env:
@@ -91,6 +90,5 @@ jobs:
           name: evidence
           path: |
             evidence
-            scribe-result.sarif
             trivy-report.sarif
           retention-days: 1
