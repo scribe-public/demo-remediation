@@ -79,8 +79,7 @@ jobs:
           initiative: v2/initiatives/sp-800-190.yaml
           allow-unicode: true
           payload: scribe-policy-result.sarif
-          input:
-            "sarif:trivy-report.sarif"
+          input: sarif:trivy-report.sarif
           verbose: 2
 
       - name: Upload evidence
