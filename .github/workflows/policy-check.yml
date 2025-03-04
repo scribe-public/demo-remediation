@@ -72,7 +72,7 @@ jobs:
           initiative: v2/initiatives/sp-800-190.yaml
           target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
           bom: true # Create CycloneDX SBOM evidence
-          base-image: Dockerfile # Include base image evidence in SBOM
+          base-image: Dockerfile_slim # Include base image evidence in SBOM
           # input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
           # attest-default: sigstore-github
