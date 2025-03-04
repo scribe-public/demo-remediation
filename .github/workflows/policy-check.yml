@@ -45,7 +45,7 @@ jobs:
           context: .
           push: false
           tags: |
-            ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
+            my_test:latest
   
       # - uses: aquasecurity/trivy-action@0.28.0
       #   name: Run Trivy
@@ -70,7 +70,7 @@ jobs:
         continue-on-error: true
         with:
           # initiative: v2/initiatives/sp-800-190.yaml
-          target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
+          target: my_test:latest
           # bom: true # Create CycloneDX SBOM evidence
           # base-image: Dockerfile # Include base image evidence in SBOM
           # input: sarif:trivy-report.sarif # Create Vulnerability evidence
