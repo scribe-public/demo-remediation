@@ -20,6 +20,7 @@ env:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 
 # Test 1
