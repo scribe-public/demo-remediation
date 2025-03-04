@@ -64,8 +64,6 @@ jobs:
           output: 'trivy-report.sarif'
           severity: 'CRITICAL,HIGH'
 
-      - run: |
-          ls -lh
 
       # Continue on error for pr events.
       - name: Collect Evidence and Evaluate Image Policy
