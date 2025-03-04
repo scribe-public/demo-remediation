@@ -80,7 +80,8 @@ jobs:
           allow-unicode: true
           payload: scribe-policy-result.sarif
           input:
-            "trivy:trivy-report.sarif"
+            "sarif:trivy-report.sarif"
+          verbose: 2
 
       - name: Upload evidence
         if: always() 
