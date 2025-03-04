@@ -17,8 +17,8 @@ env:
   VALINT_BOM_SUPPLIER_EMAIL: info@mycompany.com
   VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
   
- 
- image-policy-check:
+jobs:
+  image-policy-check:
     runs-on: ubuntu-latest
     needs: semgrep_scan
     permissions:
