@@ -18,6 +18,10 @@ env:
   VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
 
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+
 # Test 1
 jobs:
   image-policy-check:
@@ -70,7 +74,7 @@ jobs:
       # Continue on error for pr events.
       # uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
       - name: Collect Evidence and Evaluate Image Policy
-        uses: scribe-security/action-verify@main
+        uses: scribe-security/action-verify@master
         continue-on-error: true
         with:
           # initiative: v2/initiatives/sp-800-190.yaml
@@ -79,7 +83,7 @@ jobs:
           # base-image: Dockerfile # Include base image evidence in SBOM
           # input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
-          attest-default: sigstore-github
+          # attest-default: sigstore-github
           # bundle-branch: draft-sp-800-190
           # allow-unicode: true
           verbose: 2
