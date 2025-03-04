@@ -73,9 +73,9 @@ jobs:
           target: my_test:latest
           bom: true # Create CycloneDX SBOM evidence
           base-image: Dockerfile # Include base image evidence in SBOM
-          input: sarif:trivy-report.sarif # Create Vulnerability evidence
+          # input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
-          attest-default: sigstore-github
+          # attest-default: sigstore-github
           bundle-branch: draft-sp-800-190
           allow-unicode: true
           verbose: 2
