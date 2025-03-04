@@ -8,9 +8,9 @@ on:
     branches:
       - main
 
-# concurrency:
-#   group: ${{ github.workflow }}-${{ github.ref }}
-#   cancel-in-progress: true
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 
 # Test 1
@@ -46,7 +46,7 @@ jobs:
           file: Dockerfile_slim
           push: false
           tags: |
-            my_test:latest
+            ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }
   
       # - uses: aquasecurity/trivy-action@0.28.0
       #   name: Run Trivy
@@ -69,8 +69,8 @@ jobs:
         uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
         continue-on-error: true
         with:
-          # initiative: v2/initiatives/sp-800-190.yaml
-          target: my_test:latest
+          initiative: v2/initiatives/sp-800-190.yaml
+          target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }
           bom: true # Create CycloneDX SBOM evidence
           base-image: Dockerfile # Include base image evidence in SBOM
           # input: sarif:trivy-report.sarif # Create Vulnerability evidence
