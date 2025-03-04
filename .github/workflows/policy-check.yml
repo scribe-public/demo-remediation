@@ -72,16 +72,24 @@ jobs:
         uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
         continue-on-error: true
         with:
-          target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
-          format: attest
-          label: "policy-check-sp-800-190-image-countermeasures"
-          bundle-branch: draft-sp-800-190
           initiative: v2/initiatives/sp-800-190.yaml
+          target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
+          bom: true # Create CycloneDX SBOM evidence
+          base-image: Dockerfile # Include base image evidence in SBOM
+          input: sarif:trivy-report.sarif # Create Vulnerability evidence
+          format: attest # Signing Image requirement
+          bundle-branch: draft-sp-800-190
           allow-unicode: true
-          input: sarif:trivy-report.sarif
           verbose: 2
         env:
           DEBUG: true
+          VALINT_BOM_AUTHOR_NAME: Sam # Include NTIA requirement in SBOM
+          VALINT_BOM_AUTHOR_EMAIL: sam@mycompany.com
+          VALINT_BOM_AUTHOR_PHONE: +97252-1111111
+          VALINT_BOM_SUPPLIER_NAME: Scribe-Security
+          VALINT_BOM_SUPPLIER_URL: www.mycompany.com
+          VALINT_BOM_SUPPLIER_EMAIL: info@mycompany.com
+          VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
 
       - name: Upload evidence
         if: always() 
