@@ -18,7 +18,7 @@ env:
   VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
 
 
-# Test
+# Test 1
 jobs:
   image-policy-check:
     runs-on: ubuntu-latest
