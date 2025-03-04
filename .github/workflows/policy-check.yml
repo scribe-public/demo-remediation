@@ -81,6 +81,8 @@ jobs:
           payload: scribe-policy-result.sarif
           input: sarif:trivy-report.sarif
           verbose: 2
+        env:
+          DEBUG: true
 
       - name: Upload evidence
         if: always() 
