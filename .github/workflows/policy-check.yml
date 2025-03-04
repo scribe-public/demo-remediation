@@ -16,7 +16,9 @@ env:
   VALINT_BOM_SUPPLIER_URL: www.mycompany.com
   VALINT_BOM_SUPPLIER_EMAIL: info@mycompany.com
   VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
-  
+
+
+# Test
 jobs:
   image-policy-check:
     runs-on: ubuntu-latest
