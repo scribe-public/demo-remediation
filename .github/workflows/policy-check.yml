@@ -8,19 +8,9 @@ on:
     branches:
       - main
 
-env:
-  VALINT_BOM_AUTHOR_NAME: Sam
-  VALINT_BOM_AUTHOR_EMAIL: sam@mycompany.com
-  VALINT_BOM_AUTHOR_PHONE: +97252-1111111
-  VALINT_BOM_SUPPLIER_NAME: Scribe-Security
-  VALINT_BOM_SUPPLIER_URL: www.mycompany.com
-  VALINT_BOM_SUPPLIER_EMAIL: info@mycompany.com
-  VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
-
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }}
+#   cancel-in-progress: true
 
 
 # Test 1
