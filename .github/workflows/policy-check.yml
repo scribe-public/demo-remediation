@@ -68,19 +68,20 @@ jobs:
           ls -lh
           
       # Continue on error for pr events.
+      # uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
       - name: Collect Evidence and Evaluate Image Policy
-        uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
+        uses: scribe-security/action-verify@main
         continue-on-error: true
         with:
-          initiative: v2/initiatives/sp-800-190.yaml
+          # initiative: v2/initiatives/sp-800-190.yaml
           target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
           bom: true # Create CycloneDX SBOM evidence
           # base-image: Dockerfile # Include base image evidence in SBOM
           # input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
           attest-default: sigstore-github
-          bundle-branch: draft-sp-800-190
-          allow-unicode: true
+          # bundle-branch: draft-sp-800-190
+          # allow-unicode: true
           verbose: 2
         env:
           DEBUG: true
