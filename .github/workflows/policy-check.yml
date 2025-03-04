@@ -68,7 +68,7 @@ jobs:
 
       # Continue on error for pr events.
       - name: Collect Evidence and Evaluate Image Policy
-        uses: scribe-security/action-bom@sh-5802_initiatives_config
+        uses: scribe-security/action-bom@feat/sh-5802_initiatives_config
         continue-on-error: true
         with:
           target: ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ vars.VERSION }}
