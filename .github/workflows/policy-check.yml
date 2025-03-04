@@ -22,7 +22,6 @@ env:
 jobs:
   image-policy-check:
     runs-on: ubuntu-latest
-    needs: semgrep_scan
     permissions:
       contents: read
       actions: read
