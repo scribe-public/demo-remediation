@@ -48,20 +48,17 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/astro-analytics-slim:${{ vars.VERSION }}
   
-      # - uses: aquasecurity/trivy-action@0.28.0
-      #   name: Run Trivy
-      #   continue-on-error: true
-      #   with:
-      #     image-ref: ghcr.io/${{ github.repository_owner }}/astro-analytics-slim:${{ vars.VERSION }}
-      #     format: 'sarif'
-      #     exit-code: '0'
-      #     ignore-unfixed: true
-      #     vuln-type: 'os,library'
-      #     output: 'trivy-report.sarif'
-      #     severity: 'CRITICAL,HIGH'
-
-      - run: |
-          ls -lh
+      - uses: aquasecurity/trivy-action@0.28.0
+        name: Run Trivy
+        continue-on-error: true
+        with:
+          image-ref: ghcr.io/${{ github.repository_owner }}/astro-analytics-slim:${{ vars.VERSION }}
+          format: 'sarif'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          output: 'trivy-report.sarif'
+          severity: 'CRITICAL,HIGH'
 
 
 
@@ -74,9 +71,8 @@ jobs:
           target: ghcr.io/${{ github.repository_owner }}/astro-analytics-slim:${{ vars.VERSION }}
           bom: true # Create CycloneDX SBOM evidence
           base-image: Dockerfile_slim # Include base image evidence in SBOM
-          # input: sarif:trivy-report.sarif # Create Vulnerability evidence
+          input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
-          # attest-default: sigstore-github
           bundle-branch: draft-sp-800-190
           allow-unicode: true
           verbose: 2
