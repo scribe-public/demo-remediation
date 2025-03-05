@@ -60,8 +60,6 @@ jobs:
           output: 'trivy-report.sarif'
           severity: 'CRITICAL,HIGH'
 
-
-
       # Continue on error for pr events.
       - name: Collect Evidence and Evaluate Image Policy
         uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
