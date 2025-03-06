@@ -47,7 +47,7 @@ jobs:
             scribe-client-secret: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
             components: commits,packages,files,dep
             format: attest
-            config: .valint.yaml
+            # config: .valint.yaml
             verbose: 2
             label: is_git_commit
 
