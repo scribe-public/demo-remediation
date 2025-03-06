@@ -38,3 +38,4 @@ jobs:
           product-key: "Astro-Analytics"
           product-version: ${{ vars.VERSION }}
           base-image: Dockerfile
+          components: files

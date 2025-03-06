@@ -1,0 +1,67 @@
+name: Attest to reference data (attest-commit)
+
+env:
+  
+  APP_NAME: Astro-Analytics
+  VALINT_BOM_AUTHOR_NAME: Guy-Chernobrov
+  VALINT_BOM_AUTHOR_EMAIL: gc@scribesecurity.com
+  VALINT_BOM_AUTHOR_PHONE: 052-9281309
+  VALINT_BOM_SUPPLIER_NAME: Scribe-Security
+  VALINT_BOM_SUPPLIER_URL: www.scribesecurity.com
+  VALINT_BOM_SUPPLIER_EMAIL: info@scribesecurity.com
+  VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
+  INTEGRATION_TEST: 15s
+  GITHUB_RUN_NUM: ${{ github.run_number }}
+  
+  
+on:
+  workflow_dispatch:
+#  pull_request:
+#  push:
+#    branches: [main]
+
+concurrency: 
+  group: build-in-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  attest-checkout:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+       
+           
+      - name: Generate signed SBOM for repo content clone
+        uses: scribe-security/action-bom@master
+        with:
+            target: 'git:.'
+            scribe-enable: true
+            product-key: ${{ env.APP_NAME }}
+            product-version: ${{vars.VERSION}}
+            scribe-client-secret: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+            components: commits,packages,files,dep
+            format: attest
+            config: .valint.yaml
+            verbose: 2
+            label: is_git_commit
+
+      - name: Build image locally
+        run:  docker build -t astro-analytics:dependency-reference .
+
+      - name: Generate File-Level SBOM labeled dependencies-reference
+        uses: scribe-security/action-bom@master
+        with:
+            target: docker:astro-analytics:dependency-reference
+            scribe-enable: true
+            product-key: Astro-Analytics
+            product-version: ${{vars.VERSION}}
+            scribe-client-secret: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+            components: files
+            label: dependencies-reference
+      
