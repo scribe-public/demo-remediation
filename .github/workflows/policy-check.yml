@@ -93,4 +93,3 @@ jobs:
             trivy-report.sarif
           retention-days: 1
 
-          
