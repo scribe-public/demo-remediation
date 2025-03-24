@@ -1,6 +1,7 @@
 name: Policy-Check
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -70,7 +71,7 @@ jobs:
           base-image: Dockerfile_slim # Include base image evidence in SBOM
           input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
-          bundle-branch: suggestion_gen_doc #draft-sp-800-190
+          bundle-branch: suggestion_gen_doc
           allow-unicode: true
           verbose: 2
         env:
