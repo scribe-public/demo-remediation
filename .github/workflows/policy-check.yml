@@ -12,6 +12,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+
 # Test 1
 jobs:
   image-policy-check:
