@@ -9,4 +9,4 @@ To try it out:
 The code includes:
 - A `package.json` file with a `start` script that imports a KEV vulnerable module [CVE-2021-21315](https://nvd.nist.gov/vuln/detail/CVE-2021-21315) 
 - A python script with a secret in the code
-
+ 
