@@ -26,7 +26,7 @@ jobs:
           args: >-
             --token ${{ secrets.DEMO_GH_SECRET}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
-            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *pipeline-demo::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
             
 
