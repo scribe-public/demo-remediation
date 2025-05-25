@@ -1,4 +1,4 @@
-name: Build to GCR
+name: Build Only to GCR
 
 on:
   workflow_dispatch:
