@@ -62,7 +62,7 @@ jobs:
 
       # Continue on error for pr events.
       - name: Collect Evidence and Evaluate Image Policy
-        uses: scribe-security/action-verify@feat/sh-5802_initiatives_config
+        uses: scribe-security/action-verify@dev
         # continue-on-error: true
         with:
           initiative: sp-800-190@v2
