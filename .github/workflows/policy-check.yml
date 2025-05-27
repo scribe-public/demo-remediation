@@ -71,7 +71,7 @@ jobs:
           base-image: Dockerfile_slim # Include base image evidence in SBOM
           input: sarif:trivy-report.sarif # Create Vulnerability evidence
           format: attest # Signing Image requirement
-          bundle-branch: v2
+          bundle-branch: dev
           allow-unicode: true
           verbose: 2
         env:
