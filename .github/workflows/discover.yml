@@ -30,7 +30,6 @@ jobs:
             --repository.mapping *demo-pipeline::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
             --hook trivy_iac_and_secrets
-            --repository.hooks "semgrep scan --sarif --config auto --output \$HOOK_OUTPUT_FILE"::semgrep::sarif::"Semgrep Static Analysis"
             
 
       # - name: Verify Github
