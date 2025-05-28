@@ -29,8 +29,18 @@ jobs:
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
             --repository.mapping *demo-pipeline::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
-            --hook trivy_iac_and_secrets,opengrep
+            --hook trivy_iac_and_secrets
             
+      - name: Discover Github
+        uses: scribe-security/action-platforms@dev
+        with:
+          command: bom
+          platform: github
+          args: >-
+            --token ${{ secrets.DEMO_GH_SECRET}}
+            --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *demo-pipeline::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --hook opengrep
 
       # - name: Verify Github
       #   uses: scribe-security/action-platforms@dev
@@ -54,8 +64,8 @@ jobs:
         targets: ghcr.io/scribe-public/astro-analytics:${{ vars.VERSION }}
         docker-registry: ghcr.io
         sbom: true
-        k8s_discovery_args: hook kubescape_cluster,apparmor_namespace
-        k8s_bom_args: hook trivy_iac_and_secrets
+        k8s_discovery_args: --hook kubescape_cluster,apparmor_namespace
+        k8s_bom_args: --hook trivy_iac_and_secrets
     secrets: 
         SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
         DOCKERHUB_USERNAME: ${{ github.actor }}
