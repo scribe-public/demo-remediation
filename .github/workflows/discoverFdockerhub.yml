@@ -60,8 +60,7 @@ jobs:
         scribe_valint_url: "https://api.scribesecurity.com"
         scribe_product_name: "Astro-Analytics-Discovery"
         scribe_product_version: "${{ vars.VERSION }}"
-        targets: ghcr.io/scribe-public/astro-analytics:${{ vars.VERSION }}
-        docker-registry: ghcr.io
+        targets: scribesecurity/astro-analytics:${{ vars.VERSION }}
         sbom: true
         k8s_discovery_args: --hook kubescape_cluster,apparmor_namespace
         k8s_bom_args: --hook trivy_iac_and_secrets
