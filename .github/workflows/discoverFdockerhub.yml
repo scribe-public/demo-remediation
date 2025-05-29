@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Discover Github
-        uses: scribe-security/action-platforms@dev
+        uses: scribe-security/action-platforms@dev-latest
         with:
           command: discover
           platform: github
@@ -30,8 +30,8 @@ jobs:
             --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
             --hook trivy_iac_and_secrets
             
-      - name: Discover Github
-        uses: scribe-security/action-platforms@dev
+      - name: BOM Github
+        uses: scribe-security/action-platforms@dev-latest
         with:
           command: bom
           platform: github
