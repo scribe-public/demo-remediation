@@ -70,9 +70,9 @@ jobs:
           bom: true # Create CycloneDX SBOM evidence
           base-image: Dockerfile_slim # Include base image evidence in SBOM
           input: sarif:trivy-report.sarif # Create Vulnerability evidence
-          format: attest # Signing Image requirement
+          input-format: attest # Signing Image requirement
           bundle-branch: dev
-          allow-unicode: true
+          beautify: true
           verbose: 2
         env:
           DEBUG: true
