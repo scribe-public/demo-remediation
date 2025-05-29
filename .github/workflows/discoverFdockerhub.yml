@@ -1,4 +1,4 @@
-name: Discover (agentless) Pipeline
+name: Discover (agentless-Dockerhub) Pipeline
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Build to GCR
+name: Build to Dockerhub
 
 on:
   workflow_dispatch:
