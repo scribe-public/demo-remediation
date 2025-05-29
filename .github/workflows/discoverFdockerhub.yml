@@ -67,6 +67,6 @@ jobs:
         k8s_bom_args: --hook trivy_iac_and_secrets
     secrets: 
         SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-        DOCKERHUB_USERNAME: ${{ github.actor }}
-        DOCKERHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         
