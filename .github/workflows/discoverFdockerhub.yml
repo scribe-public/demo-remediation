@@ -2,7 +2,10 @@ name: Discover (agentless-Dockerhub) Pipeline
 
 on:
   workflow_dispatch:
-
+  workflow_run:
+    workflows: ["Build to Dockerhub"]
+    types: [completed]
+    
 env:
   PRODUCT_NAME: "Astro-Analytics-Discovery"
   PRODUCT_VERSION: ${{ vars.VERSION }}
