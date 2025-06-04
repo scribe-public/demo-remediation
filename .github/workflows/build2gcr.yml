@@ -21,9 +21,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { Octokit } = require("@octokit/rest");
-            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-            await octokit.actions.createOrUpdateEnvironmentVariable({
+            await github.actions.createOrUpdateEnvironmentVariable({
               owner: context.repo.owner,
               repo: context.repo.repo,
               environment_name: "PRODUCT_VERSION",
