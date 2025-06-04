@@ -13,9 +13,3 @@ The code includes:
 - The `on-push.yml` workflow create two reference SBOMs: one for the git-commit, and one for comparing dependencies.
 - The build2gcr.yml builds the image and create a file-level sbom to enable (among other features) also verifying dependencies integrity. 
 
-Example:
-* build2gcr sbom ref: 332448 (Gold Team)
-* on-push sbom ref: 332452 (Gold Team)
-
-Goto to Analytics->fileDiff, enter these two attestation ids and enter a file path regex such as /app/node_modules/* 
-Expect to get empty results as the dependencies are the same in both the SBOMs.
