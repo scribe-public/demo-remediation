@@ -16,14 +16,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Set PRODUCT_VERSION as a repository variable
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PRODUCT_VERSION: "1.2.3"  # Replace this dynamically as needed
-        run: |
-          gh auth setup-git
-          gh variable set PRODUCT_VERSION --body "$PRODUCT_VERSION"
      
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
