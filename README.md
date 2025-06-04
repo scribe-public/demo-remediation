@@ -6,7 +6,7 @@ The Scribe Demo Pipeline is a sample build pipeline implemented as a GitHub Work
 This document offers a step-by-step guide for running the demo pipeline and introduces some of the platform’s core capabilities.
 ## 2. Prerequisites
 To use this demo, the following prerequisites are required:
-1. A GitHub account (Team plan or higher) with permissions to generate GitHub tokens and set organization-level secrets.
+1. A GitHub account (Team plan or higher) with permissions to generate GitHub tokens and organization-level read access.
 2. A Scribe Hub account with an admin user.
 ## 3. The Demo Use Case
 Consider the following scenario: your organization has a small software project—a simple Node.js web application with some logic implemented in Python. All source files are stored in a single GitHub repository, and the application is containerized.
