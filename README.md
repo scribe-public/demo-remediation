@@ -34,7 +34,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
       git remote add origin https://github.com/<your-org>/demo-pipeline.git
       git push -u origin main
 ```
-   Check that the GitHub repo now contains the demo files.
+      Check that the GitHub repo now contains the demo files.
    
 3. Generate a GitHub personal access token with the following permissions:
 ![PAT_Permissions1](images/patnew.png)
