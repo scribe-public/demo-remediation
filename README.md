@@ -23,7 +23,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
 ## 4. Using the Demo: Step-by-Step
 1. Fork the demo repository into your own GitHub organization.
 2. Generate a GitHub personal access token with the following permissions:
-![PAT_Permissions1](images/pat.png)
+![PAT_Permissions1](images/pat3.png)
 
 3. Store the token in a repository Action secret named DEMO_GH_SECRET
    (Settings → Secrets and variables → Actions → New repository secret)
