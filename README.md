@@ -25,7 +25,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
    1. Download named demo-pipeline-0.1.3.tar.gz to your local machine.
    2. In your GitHub organization create a new repo named demo-pipeline.
    3. On your local machine, expand the repo TAR file and push it to the newly created GitHub repo
-''' Bash
+``` Bash
       tar -vxf demo-pipeline-0.1.3.tar.gz
       cd demo-pipeline-0.1.3
       git init
@@ -33,7 +33,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
       git branch -M main
       git remote add origin https://github.com/scribe-security/demo-pipeline.git
       git push -u origin main
-      '''
+      ```
    Check that the GitHub repo now contains the demo files.
 3. Generate a GitHub personal access token with the following permissions:
 ![PAT_Permissions1](images/patnew.png)
