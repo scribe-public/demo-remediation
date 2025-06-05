@@ -21,18 +21,29 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
 3. Scanning for exposed secrets in the source code.
 4. Gaining visibility into the lineage of workloads in production—where they were built, their source, and ownership.
 ## 4. Using the Demo: Step-by-Step
-1. Fork the demo repository into your own GitHub organization.
-2. Generate a GitHub personal access token with the following permissions:
+1. Download the demo repo TAR file and push it to your GitHub organization
+   1. Download named demo-pipeline-0.1.3.tar.gz to your local machine.
+   2. In your GitHub organization create a new repo named demo-pipeline.
+   3. On your local machine, expand the repo TAR file and push it to the newly created GitHub repo
+      tar -vxf demo-pipeline-0.1.3.tar.gz
+      cd demo-pipeline-0.1.3
+      git init
+      git commit -m "Upload demo pipeline files"
+      git branch -M main
+      git remote add origin https://github.com/scribe-security/demo-pipeline.git
+      git push -u origin main
+   Check that the GitHub repo now contains the demo files.
+3. Generate a GitHub personal access token with the following permissions:
 ![PAT_Permissions1](images/patnew.png)
 
-3. Store the token in a repository Action secret named DEMO_GH_SECRET
+4. Store the token in a repository Action secret named DEMO_GH_SECRET
    (Settings → Secrets and variables → Actions → New repository secret)
-4. Log into your Scribe Hub account and generate a new API token
+5. Log into your Scribe Hub account and generate a new API token
    (Account → API Token → Create API Token)
 ![API_Token_Scribe](images/api1.png)
-5. Store the Scribe API token in an Action secret named SCRIBE_TOKEN
+6. Store the Scribe API token in an Action secret named SCRIBE_TOKEN
    (Settings → Secrets and variables → Actions → New repository secret)
-6. You are now ready to run the build pipeline.
+7. You are now ready to run the build pipeline.
    Navigate to the Actions tab in your GitHub repository and run the workflow titled Build to GCR. This workflow will:
    - Build a container from the source code
    - Push the image to the GitHub container registry
@@ -44,7 +55,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
    > This method demonstrates basic SBOM generation from a build pipeline and vulnerability analysis. It requires instrumentation with action-bom.
    > To scan without instrumentation, the next step demonstrates agentless discovery.
 
-7. Deploy a workload to a production K8s cluster and map its lineage.
+8. Deploy a workload to a production K8s cluster and map its lineage.
    The workflow titled Discover (agentless) Pipeline combines two stages:
    - It deploys the image built in step 6 to a Kubernetes cluster (emulated using Minikube).
    - It then runs a discovery sequence across your CI/CD systems—GitHub repo, container registry, and K8s cluster—to generate attestations about all discovered assets.
@@ -60,7 +71,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
    ![Findings](images/findings1.png)
    ![Discovery](images/discovery1.png)
 
-8. Try scanning your own repositories.
+9. Try scanning your own repositories.
    After experimenting with the demo environment, use the scan-repos workflow to analyze your own GitHub repositories. This workflow:
    - Scans your GitHub organization
    - Identifies the most recently active repositories (based on commits)
