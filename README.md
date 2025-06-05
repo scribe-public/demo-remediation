@@ -22,9 +22,9 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
 4. Gaining visibility into the lineage of workloads in production—where they were built, their source, and ownership.
 ## 4. Using the Demo: Step-by-Step
 1. Download the demo repo TAR file and push it to your GitHub organization
-   1. Download named demo-pipeline-0.1.3.tar.gz to your local machine.
+   1. Download named [demo-pipeline-0.1.3.tar.gz](https://github.com/scribe-public/demo-pipeline/archive/refs/tags/v0.1.3.tar.gz) to your local machine.
    2. In your GitHub organization create a new repo named demo-pipeline.
-   3. On your local machine, expand the repo TAR file and push it to the newly created GitHub repo
+   3. On your local machine, expand the repo TAR file and push it to the newly created GitHub repo:
 ``` Bash
       tar -vxf demo-pipeline-0.1.3.tar.gz
       cd demo-pipeline-0.1.3
