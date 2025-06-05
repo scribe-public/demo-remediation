@@ -89,7 +89,7 @@ jobs:
     with:
       scribe_product_name: "Astro-Analytics-Discovery"
       scribe_product_version: ${{ needs.github-evidence.outputs.product_version }}
-      targets: ghcr.io/scribe-public/astro-analytics:${{ needs.github-evidence.outputs.PRODUCT_VERSION }}
+      targets: ghcr.io/${{github.repository_owner}}/astro-analytics:${{ needs.github-evidence.outputs.PRODUCT_VERSION }}
       docker-registry: ghcr.io
       sbom: true
       k8s_discovery_args: --hook kubescape_cluster,apparmor_namespace
