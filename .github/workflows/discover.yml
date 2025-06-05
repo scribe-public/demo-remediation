@@ -43,7 +43,12 @@ jobs:
       
           echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_ENV
           echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_OUTPUT
-      
+      - name: Get Repository Base Name
+        run: |
+          # Extract the base name of the repository
+          REPO_BASE_NAME=$(basename ${{ github.repository }})
+          echo "REPO_BASE_NAME=$REPO_BASE_NAME" >> $GITHUB_ENV
+
       - name: Discover Github
         uses: scribe-security/action-platforms@dev
         with:
@@ -52,7 +57,7 @@ jobs:
           args: >-
             --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
-            --repository.mapping *demo-pipeline::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
             --hook trivy_iac_and_secrets
             
@@ -64,7 +69,7 @@ jobs:
           args: >-
             --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
-            --repository.mapping *demo-pipeline::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --hook opengrep
 
       - name: Verify Github
@@ -74,7 +79,7 @@ jobs:
           platform: github
           args: >-
             --organization.mapping *${{ github.repository_owner}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
-            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --initiative sspb-gh.yaml@v2
             
   k8s-evidence:
