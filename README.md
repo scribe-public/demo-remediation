@@ -47,7 +47,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
 6. Store the Scribe API token in an Action secret named SCRIBE_TOKEN
    (Settings → Secrets and variables → Actions → New repository secret)
 7. You are now ready to run the build pipeline.
-   Navigate to the Actions tab in your GitHub repository and run the workflow titled Build to GCR. This workflow will:
+   Navigate to the Actions tab in your GitHub repository and run the workflow titled `Build to GCR`. This workflow will:
    - Build a container from the source code
    - Push the image to the GitHub container registry
    - Use Scribe’s GitHub Action action-bom to scan the built image and generate an SBOM
@@ -59,7 +59,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
    > To scan without instrumentation, the next step demonstrates agentless discovery.
 
 8. Deploy a workload to a production K8s cluster and map its lineage.
-   The workflow titled Discover (agentless) Pipeline combines two stages:
+   The workflow titled `Discover (agentless) Pipeline` combines two stages:
    - It deploys the image built in step 6 to a Kubernetes cluster (emulated using Minikube).
    - It then runs a discovery sequence across your CI/CD systems—GitHub repo, container registry, and K8s cluster—to generate attestations about all discovered assets.
 
