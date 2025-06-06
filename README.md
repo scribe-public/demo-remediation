@@ -29,6 +29,7 @@ As a DevSecOps team member, you want to maintain strict control over supply chai
       tar -vxf demo-pipeline-0.1.3.tar.gz
       cd demo-pipeline-0.1.3
       git init
+      git add .
       git commit -m "Upload demo pipeline files"
       git branch -M main
       git remote add origin https://github.com/<your-org>/demo-pipeline.git
