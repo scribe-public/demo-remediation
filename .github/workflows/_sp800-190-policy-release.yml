@@ -27,7 +27,3 @@ jobs:
       scribe-url:     https://api.staging.scribesecurity.com
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
-    env:
-      GITHUB_REF: ${{ github.event_name == 'workflow_dispatch'
-                      && format('refs/tags/{0}', github.event.inputs.tag)
-                      || github.ref }}
