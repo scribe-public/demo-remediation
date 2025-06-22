@@ -1,4 +1,4 @@
-name: Policy-Check (Release)
+name: Policy Release Check
 
 on:
   # automatic path – real tag push
@@ -12,12 +12,6 @@ on:
         description: "Tag name to emulate, e.g. v1.2.4-rc2"
         required: true
         type: string
-
-# core needs OIDC for Scribe uploads
-permissions:
-  contents: read
-  actions:  read
-  id-token: write
 
 jobs:
   policy:
@@ -35,12 +29,13 @@ jobs:
 
     # Pass Scribe credentials
     secrets:
-      SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
 
     # Trick: when run manually, fake a refs/tags/* so the core
     #        derives PRODUCT_VERSION from our supplied tag value.
     #        The env override is visible only inside THIS job.
     env:
+      SCRIBE_URL: https://api.staging.scribesecurity.com
       GITHUB_REF: ${{ github.event_name == 'workflow_dispatch'
                       && format('refs/tags/{0}', github.event.inputs.tag)
                       || github.ref }}
