@@ -45,3 +45,4 @@ jobs:
           product-version: ${{ env.PRODUCT_VERSION }}
           base-image: Dockerfile
           components: files
+          format: attest
