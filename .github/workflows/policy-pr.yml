@@ -11,11 +11,12 @@ jobs:
   policy:
     uses: ./.github/workflows/_sp800-190-policy-core.yml
     with:
-      upload:         true
+      upload:         false
       product_suffix: "-preview"
       image-registry: ghcr.io
       image-name:     astro-analytics-slim
       dockerfile:     Dockerfile_slim
       build-context:  .
+      scribe-url:     https://api.staging.scribesecurity.com
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
