@@ -91,6 +91,7 @@ jobs:
           echo "VALINT_SCRIBE_DISABLE=true" >> "$GITHUB_ENV"
 
       - name: Set scribe URL
+        run: |
           if [[ -n "${{ inputs.scribe-url }}" ]]; then
             echo "SCRIBE_URL=${{ inputs.scribe-url }}" >> "$GITHUB_ENV"
           fi
