@@ -64,11 +64,11 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ github.sha }}
-          format: sarif
+          format: json
           exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          output: trivy-report.sarif
+          output: trivy-report.json
           severity: 'CRITICAL,HIGH'
 
       # ── derive PRODUCT_KEY / PRODUCT_VERSION ───────────────────────
@@ -105,7 +105,7 @@ jobs:
           target: ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ github.sha }}
           bom: true
           base-image: ${{ inputs.dockerfile }}
-          input: sarif:trivy-report.sarif
+          input: trivy:trivy-report.json
           input-format: attest
           format: attest
           product-key: ${{ env.PRODUCT_KEY }}
@@ -125,5 +125,5 @@ jobs:
           name: evidence
           path: |
             evidence
-            trivy-report.sarif
+            trivy-report.json
           retention-days: 7
