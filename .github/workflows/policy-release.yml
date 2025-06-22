@@ -15,25 +15,17 @@ on:
 
 jobs:
   policy:
-    # ▸ If this is a tag push: always run
-    # ▸ If manual: run only when 'tag' input is non-empty
     if: ${{ github.event_name == 'push' || github.event.inputs.tag != '' }}
     uses: ./.github/workflows/_policy-core.yml
     with:
-      upload:          true                    # always upload on “release”
-      product_suffix:  "-release"                      # stable PRODUCT_KEY
+      upload:          true                 
+      product_suffix:  "-release"
       image-registry:  ghcr.io
       image-name:      astro-analytics-slim
       dockerfile:      Dockerfile_slim
       build-context:   .
-
-    # Pass Scribe credentials
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
-
-    # Trick: when run manually, fake a refs/tags/* so the core
-    #        derives PRODUCT_VERSION from our supplied tag value.
-    #        The env override is visible only inside THIS job.
     env:
       SCRIBE_URL: https://api.staging.scribesecurity.com
       GITHUB_REF: ${{ github.event_name == 'workflow_dispatch'
