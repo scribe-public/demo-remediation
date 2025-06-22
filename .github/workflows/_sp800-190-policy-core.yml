@@ -86,7 +86,6 @@ jobs:
 
       - name: Set Upload flag
         id: upload_flag
-        if: ${{ inputs.upload == false }}
         run: |
           echo "VALINT_SCRIBE_DISABLE=true" >> "$GITHUB_ENV"
 
