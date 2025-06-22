@@ -12,7 +12,8 @@ env:
 jobs:
   build-pipeline:
     runs-on: ubuntu-latest
-    permissions:
+    permissions:    
+      id-token: write
       packages: write
       contents: read
     steps:
