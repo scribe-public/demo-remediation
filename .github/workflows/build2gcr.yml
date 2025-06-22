@@ -49,4 +49,4 @@ jobs:
           base-image: Dockerfile
           components: files
           format: attest
-          initiative: slsa.l2@v2
+          initiative: slsa.l2@v2,ssdf@v2
