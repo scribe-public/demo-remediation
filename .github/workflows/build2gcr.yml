@@ -49,4 +49,17 @@ jobs:
           base-image: Dockerfile
           components: files
           format: attest
-          initiative: slsa.l2@v2, ssdf@v2
+          initiative: slsa.l2@v2
+      - name: verify-ssdf
+        uses: scribe-security/action-verify@master
+        env: 
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+        with:
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
+          base-image: Dockerfile
+          components: files
+          format: attest
+          initiative: ssdf.l2@v2
+        
