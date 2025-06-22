@@ -24,10 +24,10 @@ jobs:
       image-name:      astro-analytics-slim
       dockerfile:      Dockerfile_slim
       build-context:   .
+      scribe-url:     https://api.staging.scribesecurity.com
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
     env:
-      SCRIBE_URL: https://api.staging.scribesecurity.com
       GITHUB_REF: ${{ github.event_name == 'workflow_dispatch'
                       && format('refs/tags/{0}', github.event.inputs.tag)
                       || github.ref }}

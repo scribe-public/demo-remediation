@@ -26,6 +26,9 @@ on:
       build-context:          # build context directory
         required: true
         type: string
+      scribe-url:            # Scribe API URL
+        required: false
+        type: string
     secrets:
       SCRIBE_TOKEN:
         required: false       # only needed when upload = true
@@ -86,6 +89,10 @@ jobs:
         if: ${{ inputs.upload == false }}
         run: |
           echo "VALINT_SCRIBE_DISABLE=true" >> "$GITHUB_ENV"
+
+          if [[ -n "${{ inputs.scribe-url }}" ]]; then
+            echo "SCRIBE_URL=${{ inputs.scribe-url }}" >> "$GITHUB_ENV"
+          fi
 
       # ── optional Scribe upload ─────────────────────────────────────
       - name: Collect evidence & evaluate policy

@@ -9,7 +9,7 @@ on:
 
 jobs:
   policy:
-    uses: ./.github/workflows/_policy-core.yml
+    uses: ./.github/workflows/_sp800-190-policy-core.yml
     with:
       upload:         true
       product_suffix: "-preview"
@@ -19,5 +19,3 @@ jobs:
       build-context:  .
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
-    env:
-      SCRIBE_URL: https://api.staging.scribesecurity.com
