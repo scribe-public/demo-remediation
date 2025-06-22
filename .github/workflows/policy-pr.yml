@@ -10,7 +10,7 @@ jobs:
   policy:
     uses: ./.github/workflows/_policy-core.yml
     with:
-      upload:         false
+      upload:         true
       product_suffix: "-preview"
       image-registry: ghcr.io
       image-name:     astro-analytics-slim

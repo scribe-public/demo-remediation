@@ -1,0 +1,46 @@
+name: Policy-Check (Release)
+
+on:
+  # automatic path – real tag push
+  push:
+    tags: [ 'v*' ]
+
+  # manual path – mock a tag via “Run workflow”
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name to emulate, e.g. v1.2.4-rc2"
+        required: true
+        type: string
+
+# core needs OIDC for Scribe uploads
+permissions:
+  contents: read
+  actions:  read
+  id-token: write
+
+jobs:
+  policy:
+    # ▸ If this is a tag push: always run
+    # ▸ If manual: run only when 'tag' input is non-empty
+    if: ${{ github.event_name == 'push' || github.event.inputs.tag != '' }}
+    uses: ./.github/workflows/_policy-core.yml
+    with:
+      upload:          true                    # always upload on “release”
+      product_suffix:  "-release"                      # stable PRODUCT_KEY
+      image-registry:  ghcr.io
+      image-name:      astro-analytics-slim
+      dockerfile:      Dockerfile_slim
+      build-context:   .
+
+    # Pass Scribe credentials
+    secrets:
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+
+    # Trick: when run manually, fake a refs/tags/* so the core
+    #        derives PRODUCT_VERSION from our supplied tag value.
+    #        The env override is visible only inside THIS job.
+    env:
+      GITHUB_REF: ${{ github.event_name == 'workflow_dispatch'
+                      && format('refs/tags/{0}', github.event.inputs.tag)
+                      || github.ref }}
