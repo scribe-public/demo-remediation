@@ -62,7 +62,7 @@ jobs:
 
       # Continue on error for pr events.
       - name: Collect Evidence and Evaluate Image Policy
-        uses: scribe-security/action-verify@dev
+        uses: scribe-security/action-verify@master
         # continue-on-error: true
         with:
           initiative: sp-800-190@v2
@@ -71,18 +71,18 @@ jobs:
           base-image: Dockerfile_slim # Include base image evidence in SBOM
           input: sarif:trivy-report.sarif # Create Vulnerability evidence
           input-format: attest # Signing Image requirement
-          bundle-branch: dev
+          # bundle-branch: dev
           beautify: true
           verbose: 2
         env:
           DEBUG: true
-          VALINT_BOM_AUTHOR_NAME: Sam # Include NTIA requirement in SBOM
-          VALINT_BOM_AUTHOR_EMAIL: sam@mycompany.com
-          VALINT_BOM_AUTHOR_PHONE: +97252-1111111
-          VALINT_BOM_SUPPLIER_NAME: Scribe-Security
-          VALINT_BOM_SUPPLIER_URL: www.mycompany.com
-          VALINT_BOM_SUPPLIER_EMAIL: info@mycompany.com
-          VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
+          # VALINT_BOM_AUTHOR_NAME: Sam # Include NTIA requirement in SBOM
+          # VALINT_BOM_AUTHOR_EMAIL: sam@mycompany.com
+          # VALINT_BOM_AUTHOR_PHONE: +97252-1111111
+          # VALINT_BOM_SUPPLIER_NAME: Scribe-Security
+          # VALINT_BOM_SUPPLIER_URL: www.mycompany.com
+          # VALINT_BOM_SUPPLIER_EMAIL: info@mycompany.com
+          # VALINT_BOM_SUPPLIER_PHONE: 001-001-0011
 
       - name: Upload evidence
         if: always() 
