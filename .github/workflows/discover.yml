@@ -5,18 +5,49 @@ on:
 
 env:
   PRODUCT_NAME: "Astro-Analytics-Discovery"
-  PRODUCT_VERSION: ${{ vars.VERSION }}
+#  PRODUCT_VERSION: ${{ github.run_number }}  --- is set later
 
 jobs: 
   github-evidence:
     runs-on: ubuntu-latest
+    outputs:
+      product_version: ${{ steps.get_version.outputs.PRODUCT_VERSION }}
+
     env:
       GITHUB_EXTERNAL_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
-      SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set Product Version
+        id: get_version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Replace with your actual workflow file name
+          WORKFLOW_FILE="build2gcr.yml"
+      
+          # Get workflow ID
+          WORKFLOW_ID=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows | \
+            jq -r ".workflows[] | select(.path == \".github/workflows/${WORKFLOW_FILE}\") | .id")
+      
+          echo "Workflow ID is: $WORKFLOW_ID"
+      
+          # Get the latest successful run number
+          RUN_NUMBER=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/$WORKFLOW_ID/runs?status=success&per_page=1" | \
+            jq -r '.workflow_runs[0].run_number')
+      
+          echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_ENV
+          echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_OUTPUT
+      - name: Get Repository Base Name
+        run: |
+          # Extract the base name of the repository
+          REPO_BASE_NAME=$(basename ${{ github.repository }})
+          echo "REPO_BASE_NAME=$REPO_BASE_NAME" >> $GITHUB_ENV
 
       - name: Discover Github
         uses: scribe-security/action-platforms@dev
@@ -24,36 +55,47 @@ jobs:
           command: discover
           platform: github
           args: >-
-            --token ${{ secrets.DEMO_GH_SECRET}}
+            --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
-            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --commit.skip --scope.workflow.past_days 2 --scope.workflow.analyzed_logs
+            --hook trivy_iac_and_secrets
             
+      - name: Discover Github
+        uses: scribe-security/action-platforms@dev
+        with:
+          command: bom
+          platform: github
+          args: >-
+            --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
+            --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
+            --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --hook opengrep
 
       - name: Verify Github
         uses: scribe-security/action-platforms@dev
         with:
           command: verify
           platform: github
-          valint_args: --valint.bundle-branch sh-5883-ssdf
           args: >-
             --organization.mapping *${{ github.repository_owner}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
-            --repository.mapping *${{ github.repository}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
-            --repository.policy ssdf-repo@discovery
-            --repo-policy-skip-aggregate
-
+            --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
+            --initiative sspb-gh.yaml@v2
+            
   k8s-evidence:
     name: Discover K8s
+    needs: github-evidence
     uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
     with:
-        scribe_valint_url: "https://api.scribesecurity.com"
-        scribe_product_name: "Astro-Analytics-Discovery"
-        scribe_product_version: "${{ vars.VERSION }}"
-        targets: ghcr.io/scribe-public/astro-analytics:latest
-        docker-registry: ghcr.io
-        sbom: true
-    secrets: 
-        SCRIBE_TOKEN: ${{ secrets.SCRIBE_HEYMAN_TEAM_TOKEN }}
-        DOCKERHUB_USERNAME: ${{ github.actor }}
-        DOCKERHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-        
+      scribe_product_name: "Astro-Analytics-Discovery"
+      scribe_product_version: ${{ needs.github-evidence.outputs.product_version }}
+      targets: ghcr.io/${{github.repository_owner}}/astro-analytics:${{ needs.github-evidence.outputs.PRODUCT_VERSION }}
+      docker-registry: ghcr.io
+      sbom: true
+      k8s_discovery_args: --hook kubescape_cluster,apparmor_namespace
+      k8s_bom_args: --hook trivy_iac_and_secrets
+    secrets:
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ github.actor }}
+      DOCKERHUB_PASSWORD: ${{ secrets.DEMO_GH_SECRET }}
+

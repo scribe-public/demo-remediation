@@ -1,0 +1,14 @@
+name: Demonstrate usage of reusable GitHub Discovery workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+    github-discovery-demo-usage:
+      
+      uses: scribe-public/reusable-workflows/.github/workflows/github-discovery-demo.yaml@main
+      with:
+        number_of_repos: 5
+      secrets:
+        SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+        GH_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
