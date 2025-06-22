@@ -26,4 +26,4 @@ jobs:
       build-context:   .
       scribe-url:     https://api.staging.scribesecurity.com
     secrets:
-      SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_TOKEN }}
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_MIKEY_GITHUB_TOKEN }}
