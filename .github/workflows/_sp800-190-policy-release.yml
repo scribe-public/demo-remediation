@@ -16,7 +16,7 @@ on:
 jobs:
   policy:
     if: ${{ github.event_name == 'push' || github.event.inputs.tag != '' }}
-    uses: ./.github/workflows/_policy-core.yml
+    uses: ./.github/workflows/_sp800-190-policy-core.yml
     with:
       upload:          true                 
       product_suffix:  "-release"
