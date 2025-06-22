@@ -97,6 +97,7 @@ jobs:
           base-image: ${{ inputs.dockerfile }}
           input: sarif:trivy-report.sarif
           input-format: attest
+          format: attest
           product-key: ${{ env.PRODUCT_KEY }}
           product-version: ${{ env.PRODUCT_VERSION }}
           beautify: true
