@@ -94,6 +94,7 @@ jobs:
         run: |
           if [[ -n "${{ inputs.scribe-url }}" ]]; then
             echo "SCRIBE_URL=${{ inputs.scribe-url }}" >> "$GITHUB_ENV"
+            echo "Set SCRIBE_URL to '${{ inputs.scribe-url }}'"
           fi
 
       # ── optional Scribe upload ─────────────────────────────────────
@@ -113,6 +114,7 @@ jobs:
           verbose: 2
         env:
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+          SCRIBE_URL: ${{ env.SCRIBE_URL }}
           DEBUG: true
 
       # ── always publish artifacts ───────────────────────────────────
