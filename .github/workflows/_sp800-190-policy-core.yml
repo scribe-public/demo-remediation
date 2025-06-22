@@ -114,7 +114,7 @@ jobs:
           verbose: 2
         env:
           SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
-          SCRIBE_URL: ${{ env.SCRIBE_URL }}
+          SCRIBE_URL: https://api.staging.scribesecurity.com
           DEBUG: true
 
       # ── always publish artifacts ───────────────────────────────────
