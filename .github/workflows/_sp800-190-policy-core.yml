@@ -86,9 +86,11 @@ jobs:
 
       - name: Set Upload flag
         id: upload_flag
+        if: ${{ inputs.upload == false }}
         run: |
           echo "VALINT_SCRIBE_DISABLE=true" >> "$GITHUB_ENV"
 
+      - name: Set scribe URL
           if [[ -n "${{ inputs.scribe-url }}" ]]; then
             echo "SCRIBE_URL=${{ inputs.scribe-url }}" >> "$GITHUB_ENV"
           fi
