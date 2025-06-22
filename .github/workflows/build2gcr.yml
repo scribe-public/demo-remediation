@@ -61,5 +61,5 @@ jobs:
           base-image: Dockerfile
           components: files
           format: attest
-          initiative: ssdf.l2@v2
+          initiative: ssdf@v2
         
