@@ -29,10 +29,15 @@ on:
       scribe-url:            # Scribe API URL
         required: false
         type: string
+      product-key:            # Scribe product key
+        required: false
+        type: string
+      product-version:       # Scribe product version
+        required: false
+        type: string 
     secrets:
       SCRIBE_TOKEN:
         required: false       # only needed when upload = true
-
 jobs:
   image-policy-check:
     runs-on: ubuntu-latest
@@ -72,17 +77,18 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       # ── derive PRODUCT_KEY / PRODUCT_VERSION ───────────────────────
-      - name: Derive product metadata
-        id: meta
-        run: |
-          SAFE_REPO="${GITHUB_REPOSITORY//\//-}"
-          echo "PRODUCT_KEY=${SAFE_REPO}${{ inputs.product_suffix }}" >> "$GITHUB_ENV"
+      # - name: Derive product metadata
+      #   id: meta
+      #   run: |
+      #     SAFE_REPO="${GITHUB_REPOSITORY//\//-}"
+      #     echo "PRODUCT_KEY=${SAFE_REPO}${{ inputs.product_suffix }}" >> "$GITHUB_ENV"
 
-          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-            echo "PRODUCT_VERSION=pr-${{ github.event.pull_request.number }}-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
-          else
-            echo "PRODUCT_VERSION=${GITHUB_REF#refs/tags/}" >> "$GITHUB_ENV"
-          fi
+      #     if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+      #       echo "PRODUCT_VERSION=pr-${{ github.event.pull_request.number }}-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+      #     else
+      #       echo "PRODUCT_VERSION=${GITHUB_REF#refs/tags/}" >> "$GITHUB_ENV"
+      #     fi
+          
 
       - name: Set Upload flag
         id: upload_flag
@@ -108,8 +114,8 @@ jobs:
           input: trivy:trivy-report.json
           input-format: attest
           format: attest
-          product-key: ${{ env.PRODUCT_KEY }}
-          product-version: ${{ env.PRODUCT_VERSION }}
+          product-key: ${{ inputs.product-key }}
+          product-version: ${{ inputs.product-version }}
           beautify: true
           verbose: 2
         env:

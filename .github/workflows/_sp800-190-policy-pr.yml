@@ -1,8 +1,8 @@
 name: Policy PR Check
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -18,5 +18,7 @@ jobs:
       dockerfile:     Dockerfile_slim
       build-context:  .
       scribe-url:     https://api.staging.scribesecurity.com
+      product-key:    Astro-Analytics-pull-request
+      product_version: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.run_number }}
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_SCRIBE_STAGING_MIKEY_GITHUB_TOKENSTAGING_TOKEN }}
