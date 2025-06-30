@@ -1,0 +1,24 @@
+name: Policy PR Check
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  policy:
+    uses: ./.github/workflows/_sp800-190-policy-core.yml
+    with:
+      upload:         false
+      product_suffix: "-preview"
+      image-registry: ghcr.io
+      image-name:     astro-analytics-slim
+      dockerfile:     Dockerfile_slim
+      build-context:  .
+      scribe-url:     https://api.staging.scribesecurity.com
+      product-key:    Astro-Analytics-pull-request
+      product-version: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.run_number }}
+    secrets:
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_SCRIBE_STAGING_MIKEY_GITHUB_TOKENSTAGING_TOKEN }}

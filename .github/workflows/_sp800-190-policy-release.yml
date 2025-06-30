@@ -1,0 +1,31 @@
+name: Policy Release Check
+
+on:
+  # automatic path – real tag push
+  push:
+    tags: [ 'v*' ]
+
+  # manual path – mock a tag via “Run workflow”
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name to emulate, e.g. v1.2.4-rc2"
+        required: true
+        type: string
+
+jobs:
+  policy:
+    if: ${{ github.event_name == 'push' || github.event.inputs.tag != '' }}
+    uses: ./.github/workflows/_sp800-190-policy-core.yml
+    with:
+      upload:          true                 
+      product_suffix:  "-release"
+      image-registry:  ghcr.io
+      image-name:      astro-analytics-slim
+      dockerfile:      Dockerfile_slim
+      build-context:   .
+      scribe-url:     https://api.staging.scribesecurity.com
+      product-key:     Astro-Analytics
+      product-version: ${{ github.ref_name || github.event.inputs.tag }}
+    secrets:
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_STAGING_MIKEY_GITHUB_TOKEN }}

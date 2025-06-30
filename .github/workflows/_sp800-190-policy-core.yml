@@ -1,0 +1,135 @@
+# .github/workflows/_policy-core.yml
+name: policy-core
+
+on:
+  workflow_call:
+    inputs:
+      # ── behaviour toggles ──────────────────────────────────────────
+      upload:                # true → push evidence to Scribe
+        required: true
+        type: boolean
+        default: false
+      product_suffix:         # e.g. "-preview"
+        required: true
+        type: string
+
+      # ── image parameters ─ ALL required (no internal defaults) ─────
+      image-registry:         # e.g. ghcr.io
+        required: true
+        type: string
+      image-name:             # e.g. astro-analytics-slim
+        required: true
+        type: string
+      dockerfile:             # path to Dockerfile
+        required: true
+        type: string
+      build-context:          # build context directory
+        required: true
+        type: string
+      scribe-url:            # Scribe API URL
+        required: false
+        type: string
+      product-key:            # Scribe product key
+        required: false
+        type: string
+      product-version:       # Scribe product version
+        required: false
+        type: string 
+    secrets:
+      SCRIBE_TOKEN:
+        required: false       # only needed when upload = true
+jobs:
+  image-policy-check:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      actions:  read
+      id-token: write          # OIDC token for Scribe signing
+
+    steps:
+      # ───────────────────────────────────────────────────────────────
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ${{ inputs.image-registry }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image (no push)
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ inputs.build-context }}
+          file:    ${{ inputs.dockerfile }}
+          push:    false
+          tags:    ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ github.sha }}
+
+      - name: Run Trivy vulnerability scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ github.sha }}
+          format: json
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          output: trivy-report.json
+          severity: 'CRITICAL,HIGH'
+
+      # ── derive PRODUCT_KEY / PRODUCT_VERSION ───────────────────────
+      # - name: Derive product metadata
+      #   id: meta
+      #   run: |
+      #     SAFE_REPO="${GITHUB_REPOSITORY//\//-}"
+      #     echo "PRODUCT_KEY=${SAFE_REPO}${{ inputs.product_suffix }}" >> "$GITHUB_ENV"
+
+      #     if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+      #       echo "PRODUCT_VERSION=pr-${{ github.event.pull_request.number }}-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+      #     else
+      #       echo "PRODUCT_VERSION=${GITHUB_REF#refs/tags/}" >> "$GITHUB_ENV"
+      #     fi
+          
+
+      - name: Set Upload flag
+        id: upload_flag
+        if: ${{ inputs.upload == false }}
+        run: |
+          echo "VALINT_SCRIBE_DISABLE=true" >> "$GITHUB_ENV"
+
+      - name: Set scribe URL
+        run: |
+          if [[ -n "${{ inputs.scribe-url }}" ]]; then
+            echo "SCRIBE_URL=${{ inputs.scribe-url }}" >> "$GITHUB_ENV"
+            echo "Set SCRIBE_URL to '${{ inputs.scribe-url }}'"
+          fi
+
+      # ── optional Scribe upload ─────────────────────────────────────
+      - name: Collect evidence & evaluate policy
+        uses: scribe-security/action-verify@master
+        with:
+          initiative: sp-800-190@v2
+          target: ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ github.sha }}
+          bom: true
+          base-image: ${{ inputs.dockerfile }}
+          input: trivy:trivy-report.json
+          input-format: attest
+          format: attest
+          product-key: ${{ inputs.product-key }}
+          product-version: ${{ inputs.product-version }}
+          beautify: true
+          verbose: 2
+        env:
+          SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+          SCRIBE_URL: ${{ env.SCRIBE_URL }}
+          DEBUG: true
+
+      # ── always publish artifacts ───────────────────────────────────
+      - name: Upload evidence bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence
+          path: |
+            evidence
+            trivy-report.json
+          retention-days: 7
