@@ -52,6 +52,13 @@ jobs:
           REPO_BASE_NAME=$(basename ${{ github.repository }})
           echo "REPO_BASE_NAME=$REPO_BASE_NAME" >> $GITHUB_ENV
 
+      - name: Sign in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DEMO_GH_SECRET }}
+          
       - name: Discover Github
         uses: scribe-security/action-platforms@dev
         with:
