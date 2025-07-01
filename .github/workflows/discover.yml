@@ -18,6 +18,7 @@ jobs:
     env:
       GITHUB_EXTERNAL_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+      VALINT_VERIFY_BEAUTIFY: true
 
     steps:
       - name: Checkout code

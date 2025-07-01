@@ -50,6 +50,7 @@ jobs:
           components: files
           format: attest
           initiative: slsa.l2@v2
+          
       - name: verify-ssdf
         uses: scribe-security/action-verify@master
         env: 
