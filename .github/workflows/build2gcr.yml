@@ -3,7 +3,7 @@ name: Build to GCR
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    # branches: [main]
 
 env:
   PRODUCT_NAME: "Astro-Analytics"
@@ -50,6 +50,8 @@ jobs:
           components: files
           format: attest
           initiative: slsa.l2@v2
+          beautify: true
+
       - name: verify-ssdf
         uses: scribe-security/action-verify@master
         env: 
@@ -62,4 +64,19 @@ jobs:
           components: files
           format: attest
           initiative: ssdf@v2
+          beautify: true
         
+
+      - name: verify-sp800-190
+        uses: scribe-security/action-verify@master
+        env: 
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+        with:
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:latest"
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
+          base-image: Dockerfile
+          input: trivy:trivy-report.json
+          format: attest
+          initiative: sp-800-190@v2
+          beautify: true
