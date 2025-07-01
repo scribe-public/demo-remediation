@@ -58,7 +58,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.DEMO_GH_SECRET }}
-          
+
+
+      - name: Test Login
+        run:
+          docker pull ghcr.io/scribe-public/astro-analytics:latest@sha256:64a4e04992bf0c19432a7a5fe5f45ec4b27d437fd758629d9bed7f9a150c018f
+
       - name: Discover Github
         uses: scribe-security/action-platforms@dev
         with:
@@ -73,7 +78,7 @@ jobs:
             --hook trivy_iac_and_secrets
         env:
           DOCKER_DRIVER: overlay2
-          DOCKER_CONFIG: $HOME/.docker
+          DOCKER_CONFIG: ${{ github.workspace }}/.docker
           
       # - name: Discover Github
       #   uses: scribe-security/action-platforms@dev
