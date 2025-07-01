@@ -62,7 +62,7 @@ jobs:
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
           base-image: Dockerfile
-          # input: trivy:trivy-report.json
+          # input: trivy:trivy-report.json # 2DO Scribe CVE rule to initiative willr replace this requriement.
           format: attest
           initiative: sp-800-190@v2
           beautify: true

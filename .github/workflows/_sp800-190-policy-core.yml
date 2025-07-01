@@ -79,7 +79,7 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
-          format: json
+          format: sarif
           exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
@@ -121,7 +121,7 @@ jobs:
           target: ${{ inputs.image-registry }}/${{ github.repository_owner }}/${{ inputs.image-name }}:${{ inputs.image-tag }}
           bom: true
           base-image: ${{ inputs.dockerfile }}
-          input: trivy:trivy-report.json
+          input: sarif:trivy-report.json
           input-format: attest
           format: attest
           product-key: ${{ inputs.product-key }}
