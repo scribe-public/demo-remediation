@@ -96,6 +96,7 @@ jobs:
             --hook trivy_iac_and_secrets
         env:
           DOCKER_CONFIG: /github/workspace/.docker
+          VALINT_LOG_LEVEL: debug
           # DOCKER_CONFIG: ${{ github.workspace }}/.docker
 
 
