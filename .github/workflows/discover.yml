@@ -98,7 +98,6 @@ jobs:
           DOCKER_CONFIG: /github/workspace/.docker
           # DOCKER_CONFIG: ${{ github.workspace }}/.docker
 
-
   #     - name: Bom And Static analysis Github Sources
   #       uses: scribe-security/action-platforms@dev
   #       with:
