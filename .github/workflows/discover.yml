@@ -96,7 +96,6 @@ jobs:
             --hook trivy_iac_and_secrets
         env:
           DOCKER_CONFIG: /github/workspace/.docker
-          HOME: /github/workspace
           # DOCKER_CONFIG: ${{ github.workspace }}/.docker
 
 
