@@ -70,7 +70,6 @@ jobs:
 
       - name: INFO docker
         run: |
-          sleep 10
           echo "Product Version PRODUCT_VERSION"
           ls -lh $HOME/.docker/config.json || true
           cat $HOME/.docker/config.json || true
@@ -97,6 +96,7 @@ jobs:
             --hook trivy_iac_and_secrets
         env:
           DOCKER_CONFIG: /github/workspace/.docker
+          HOME: /github/workspace
           # DOCKER_CONFIG: ${{ github.workspace }}/.docker
 
 
