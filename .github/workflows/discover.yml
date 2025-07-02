@@ -71,6 +71,7 @@ jobs:
           platform: github
           slsa: true
           sign: true
+          attest-default: sigstore
           args: >-
             --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
@@ -87,6 +88,7 @@ jobs:
           command: bom
           platform: github
           sign: true
+          attest-default: sigstore
           args: >-
             --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
@@ -99,6 +101,7 @@ jobs:
           command: verify
           platform: github
           sign: true
+          attest-default: sigstore
           args: >-
             --organization.mapping *${{ github.repository_owner}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
             --repository.mapping *${{ env.REPO_BASE_NAME}}::${{ env.PRODUCT_NAME }}::${{ env.PRODUCT_VERSION }}
