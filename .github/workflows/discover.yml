@@ -96,6 +96,7 @@ jobs:
             --hook trivy_iac_and_secrets
         env:
           DOCKER_CONFIG: /github/workspace/.docker
+          DOCKER_HOME: /github/workspace/.docker
           # DOCKER_CONFIG: ${{ github.workspace }}/.docker
 
   #     - name: Bom And Static analysis Github Sources
