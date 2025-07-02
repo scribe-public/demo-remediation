@@ -123,4 +123,3 @@ jobs:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
       DOCKERHUB_USERNAME: ${{ github.actor }}
       DOCKERHUB_PASSWORD: ${{ secrets.DEMO_GH_SECRET }}
-
