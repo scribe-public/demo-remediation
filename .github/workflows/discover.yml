@@ -23,8 +23,8 @@ jobs:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
       VALINT_VERIFY_BEAUTIFY: true
       DOCKER_DRIVER: overlay2
-      DOCKER_CONFIG: $HOME/.docker
-      
+      DOCKER_CONFIG: ${{ github.workspace }}/.docker
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -75,6 +75,8 @@ jobs:
           ls -lh $HOME/.docker/config.json || true
           cat $HOME/.docker/config.json || true
           pwd
+          ls -lh $DOCKER_CONFIG || true
+          cat $DOCKER_CONFIG/config.json || true
           docker pull ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}
           
 
