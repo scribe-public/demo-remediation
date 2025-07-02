@@ -77,7 +77,6 @@ jobs:
           pwd
           ls -lh $DOCKER_CONFIG || true
           cat $DOCKER_CONFIG/config.json || true
-          docker pull ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}
           
 
       - name: Discover Github and Image SLSA Provanence Creation
@@ -85,6 +84,8 @@ jobs:
         with:
           command: discover
           platform: github
+          valint_args: >-
+            --valint.log-level debug
           slsa: true
           sign: true
           attest-default: sigstore
@@ -96,7 +97,6 @@ jobs:
             --hook trivy_iac_and_secrets
         env:
           DOCKER_CONFIG: /github/workspace/.docker
-          VALINT_LOG_LEVEL: debug
           # DOCKER_CONFIG: ${{ github.workspace }}/.docker
 
 
