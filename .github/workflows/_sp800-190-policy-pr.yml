@@ -14,11 +14,13 @@ jobs:
       upload:         false
       product_suffix: "-preview"
       image-registry: ghcr.io
-      image-name:     astro-analytics-slim
-      dockerfile:     Dockerfile_slim
+      image-name:     astro-analytics
+      image-tag:     ${{ github.sha }}
+      dockerfile:     Dockerfile
       build-context:  .
       scribe-url:     https://api.staging.scribesecurity.com
       product-key:    Astro-Analytics-pull-request
       product-version: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.run_number }}
     secrets:
       SCRIBE_TOKEN: ${{ secrets.SCRIBE_SCRIBE_STAGING_MIKEY_GITHUB_TOKENSTAGING_TOKEN }}
+
