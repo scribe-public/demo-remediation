@@ -54,6 +54,8 @@ jobs:
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
@@ -66,6 +68,8 @@ jobs:
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
