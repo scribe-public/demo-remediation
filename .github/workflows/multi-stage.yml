@@ -47,24 +47,24 @@ jobs:
             set -e
             STAGE="stage_1"
             echo "STAGE=$STAGE" >> $GITHUB_ENV
-            echo $STAGE >> "/tmp/$STAGE"
-            cat "/tmp/$STAGE"
+            echo $STAGE >> "$STAGE"
+            cat "$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
-            target: /tmp/${{ env.STAGE }}
+            target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
       - name: Set Stage 2
         run: |
             STAGE="stage_2"
             echo "STAGE=$STAGE" >> $GITHUB_ENV
-            echo $STAGE >> "/tmp/$STAGE"
+            echo $STAGE >> "$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
-            target: /tmp/${{ env.STAGE }}
+            target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
