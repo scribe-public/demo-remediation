@@ -22,7 +22,5 @@ controls:
           evidence:
             filter-by:
               - product
-            labels:
-              - stage=stage_1
 
             
