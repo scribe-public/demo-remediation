@@ -19,8 +19,20 @@ controls:
       rules: 
         - uses: generic/evidence-exists@v2
           name: Verify stage 1
+          id: verify-stage-1
           evidence:
             filter-by:
               - product
+            labels:
+              - stage=stage_1
+
+        - uses: generic/evidence-exists@v2
+          name: Verify stage 1
+          id: verify-stage-2
+          evidence:
+            filter-by:
+              - product
+            labels:
+              - stage=stage_2
 
             
