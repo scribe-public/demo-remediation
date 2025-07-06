@@ -16,11 +16,13 @@ env:
 controls:
     - name: verify-stages
       id: verify-stages
-      description: each rule verifies some other stage
-      disable: false
-      when:
-        gate: always
       rules: 
-        - uses: generic/evidence_exists@v2
-          label: stage_1
+        - uses: generic/evidence-exists@v2
+          name: Verify stage 1
+          evidence:
+            filter-by:
+              - product
+            labels:
+              - stage=stage_1
+
             
