@@ -9,7 +9,7 @@ env:
 
 
 jobs:
-  build-pipeline:
+  demo-stage-verification:
     runs-on: ubuntu-latest
     permissions:    
       id-token: write
@@ -73,13 +73,10 @@ jobs:
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
+      - name: Install valint
+        uses: scribe-security/action-installer@master
 
       - name: Verify Stages
-        uses: scribe-security/action-verify@master
-        with:
-            target: ${{ env.STAGE }} # Remove this line after fixing the action
-            product-key: ${{ env.PRODUCT_NAME }}
-            product-version: ${{ env.PRODUCT_VERSION }}
-            initiative: policies/stages.yml
-            beautify: true
-
+        run: |
+            set -e
+            valint verify --initiative policies/stages.yml --product-key ${{ env.PRODUCT_NAME }} --product-version ${{ env.PRODUCT_VERSION }} 

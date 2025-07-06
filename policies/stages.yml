@@ -27,7 +27,7 @@ controls:
               - stage=stage_1
 
         - uses: generic/evidence-exists@v2
-          name: Verify stage 1
+          name: Verify stage 2
           id: verify-stage-2
           evidence:
             filter-by:
