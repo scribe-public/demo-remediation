@@ -1,6 +1,7 @@
 name: Multi-Stage Evidence and Verification Workflow
 on:
   workflow_dispatch:
+  push:
 
 env:
   PRODUCT_NAME: "Astro-Analytics"
