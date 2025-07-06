@@ -1,0 +1,68 @@
+name: Multi-Stage Evidence and Verification Workflow
+on:
+  workflow_dispatch:
+
+env:
+  PRODUCT_NAME: "Astro-Analytics"
+
+
+jobs:
+  build-pipeline:
+    runs-on: ubuntu-latest
+    permissions:    
+      id-token: write
+      packages: write
+      contents: read
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Product Version
+        id: get_version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Replace with your actual workflow file name
+          WORKFLOW_FILE="build2gcr.yml"
+      
+          # Get workflow ID
+          WORKFLOW_ID=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows | \
+            jq -r ".workflows[] | select(.path == \".github/workflows/${WORKFLOW_FILE}\") | .id")
+      
+          echo "Workflow ID is: $WORKFLOW_ID"
+      
+          # Get the latest successful run number
+          RUN_NUMBER=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/$WORKFLOW_ID/runs?status=success&per_page=1" | \
+            jq -r '.workflow_runs[0].run_number')
+      
+          echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_ENV
+          echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Set Stage 1
+        run: 
+            STAGE="stage 1"
+            echo $STAGE >> $GITHUB_ENV
+            ehco $STAGE >> /var/$STAGE
+
+      - name: Evidence
+        uses: scribe-security/action-evidence@v2.0.0
+        with:
+            target: /var/${{ env.STAGE }}
+            label: stage=${{ env.STAGE }}
+
+      - name: Set Stage 2
+        run: 
+            STAGE="stage 2"
+            echo $STAGE >> $GITHUB_ENV
+            ehco $STAGE >> /var/$STAGE
+
+      - name: Evidence
+        uses: scribe-security/action-evidence@v2.0.0
+        with:
+            target: /var/${{ env.STAGE }}
+            label: stage=${{ env.STAGE }}
+
+            
