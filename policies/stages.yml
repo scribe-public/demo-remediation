@@ -30,6 +30,7 @@ controls:
           name: Verify stage 2
           id: verify-stage-2
           evidence:
+            target: stage_2
             filter-by:
               - product
             labels:
