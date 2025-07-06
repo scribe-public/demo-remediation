@@ -5,6 +5,7 @@ on:
 
 env:
   PRODUCT_NAME: "Astro-Analytics"
+  SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
 
 
 jobs:
