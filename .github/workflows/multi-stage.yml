@@ -73,6 +73,15 @@ jobs:
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
+      - name: Verify Action
+        uses: scribe-security/action-verify@master
+        with:
+            target: ${{ env.STAGE }} # Remove this line after fixing the action
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{ env.PRODUCT_VERSION }}
+            initiative: policies/stages.yml
+            beautify: true
+
       - name: Install valint
         uses: scribe-security/action-installer@master
 
