@@ -45,7 +45,7 @@ jobs:
         run: |
             STAGE="stage 1"
             echo $STAGE >> $GITHUB_ENV
-            echo $STAGE >> /var/$STAGE
+            echo $STAGE >> "/var/$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
@@ -57,7 +57,7 @@ jobs:
         run: |
             STAGE="stage 2"
             echo $STAGE >> $GITHUB_ENV
-            echo $STAGE >> /var/$STAGE
+            echo $STAGE >> "/var/$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
