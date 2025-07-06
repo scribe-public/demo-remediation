@@ -43,7 +43,7 @@ jobs:
 
       - name: Set Stage 1
         run: |
-            STAGE="stage 1"
+            STAGE="stage_1"
             echo $STAGE >> $GITHUB_ENV
             echo $STAGE >> "/tmp/$STAGE"
 
@@ -55,7 +55,7 @@ jobs:
 
       - name: Set Stage 2
         run: |
-            STAGE="stage 2"
+            STAGE="stage_2"
             echo $STAGE >> $GITHUB_ENV
             echo $STAGE >> "/tmp/$STAGE"
 
