@@ -43,8 +43,9 @@ jobs:
 
       - name: Set Stage 1
         run: |
+            set -e
             STAGE="stage_1"
-            echo $STAGE >> $GITHUB_ENV
+            echo "STAGE=$STAGE" >> $GITHUB_ENV
             echo $STAGE >> "/tmp/$STAGE"
 
       - name: Evidence
@@ -56,7 +57,7 @@ jobs:
       - name: Set Stage 2
         run: |
             STAGE="stage_2"
-            echo $STAGE >> $GITHUB_ENV
+            echo "STAGE=$STAGE" >> $GITHUB_ENV
             echo $STAGE >> "/tmp/$STAGE"
 
       - name: Evidence
