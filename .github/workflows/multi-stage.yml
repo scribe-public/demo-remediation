@@ -42,7 +42,7 @@ jobs:
           echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_OUTPUT
 
       - name: Set Stage 1
-        run: 
+        run: |
             STAGE="stage 1"
             echo $STAGE >> $GITHUB_ENV
             echo $STAGE >> /var/$STAGE
@@ -54,7 +54,7 @@ jobs:
             label: stage=${{ env.STAGE }}
 
       - name: Set Stage 2
-        run: 
+        run: |
             STAGE="stage 2"
             echo $STAGE >> $GITHUB_ENV
             echo $STAGE >> /var/$STAGE
