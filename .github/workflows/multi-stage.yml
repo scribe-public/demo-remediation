@@ -45,23 +45,23 @@ jobs:
         run: |
             STAGE="stage 1"
             echo $STAGE >> $GITHUB_ENV
-            echo $STAGE >> "/var/$STAGE"
+            echo $STAGE >> "/tmp/$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
-            target: /var/${{ env.STAGE }}
+            target: /tmp/${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
       - name: Set Stage 2
         run: |
             STAGE="stage 2"
             echo $STAGE >> $GITHUB_ENV
-            echo $STAGE >> "/var/$STAGE"
+            echo $STAGE >> "/tmp/$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
-            target: /var/${{ env.STAGE }}
+            target: /tmp/${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
