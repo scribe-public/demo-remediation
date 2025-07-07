@@ -58,6 +58,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
+            format: attest
 
       - name: Set Stage 2
         run: |
@@ -72,6 +73,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
+            format: attest
 
       - name: Verify Action
         uses: scribe-security/action-verify@master
