@@ -79,3 +79,4 @@ jobs:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
+            beautify: true
