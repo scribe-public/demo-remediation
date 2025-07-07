@@ -58,6 +58,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
+            output-directory: ${GITHUB_WORKSPACE}/.valint
 
       - name: Set Stage 2
         run: |
@@ -72,6 +73,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
+            output-directory: ${GITHUB_WORKSPACE}/.valint
 
       - name: Verify Action
         uses: scribe-security/action-verify@master
@@ -79,6 +81,7 @@ jobs:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
+            output-directory: ${GITHUB_WORKSPACE}/.valint
             beautify: true
 
       - name: Verify-CLI Action
@@ -88,6 +91,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
             beautify: true
+            output-directory: ${GITHUB_WORKSPACE}/.valint
 
       - name: Install valint
         uses: scribe-security/action-installer@master
@@ -95,4 +99,5 @@ jobs:
       - name: Verify Stages
         run: |
             set -e
-            valint verify --initiative policies/stages.yml --product-key ${{ env.PRODUCT_NAME }} --product-version ${{ env.PRODUCT_VERSION }} --beautify
+            valint verify --initiative policies/stages.yml --product-key ${{ env.PRODUCT_NAME }} --product-version ${{ env.PRODUCT_VERSION }} \
+            --output-directory ${GITHUB_WORKSPACE}/.valint --beautify
