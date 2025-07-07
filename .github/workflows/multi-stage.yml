@@ -58,7 +58,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
-            output-directory: ${GITHUB_WORKSPACE}/.valint
+            output-directory: ${{ github.workspace }}/.valint
 
       - name: Set Stage 2
         run: |
@@ -73,7 +73,7 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
-            output-directory: ${GITHUB_WORKSPACE}/.valint
+            output-directory: ${{ github.workspace }}/.valint
 
       - name: Verify Action
         uses: scribe-security/action-verify@master
@@ -81,8 +81,7 @@ jobs:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
-            output-directory: ${GITHUB_WORKSPACE}/.valint
-            beautify: true
+            output-directory: ${{ github.workspace }}/.valint
 
       - name: Verify-CLI Action
         uses: scribe-security/action-verify-cli@master
@@ -90,8 +89,7 @@ jobs:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
-            beautify: true
-            output-directory: ${GITHUB_WORKSPACE}/.valint
+            output-directory: ${{ github.workspace }}/.valint
 
       - name: Install valint
         uses: scribe-security/action-installer@master
@@ -100,4 +98,4 @@ jobs:
         run: |
             set -e
             valint verify --initiative policies/stages.yml --product-key ${{ env.PRODUCT_NAME }} --product-version ${{ env.PRODUCT_VERSION }} \
-            --output-directory ${GITHUB_WORKSPACE}/.valint --beautify
+            --output-directory ${{ github.workspace }}/.valint
