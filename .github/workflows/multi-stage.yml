@@ -88,4 +88,4 @@ jobs:
       - name: Verify Stages
         run: |
             set -e
-            valint verify --initiative policies/stages.yml --product-key ${{ env.PRODUCT_NAME }} --product-version ${{ env.PRODUCT_VERSION }} 
+            valint verify --initiative policies/stages.yml --product-key ${{ env.PRODUCT_NAME }} --product-version ${{ env.PRODUCT_VERSION }} --beautify
