@@ -58,7 +58,6 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
-            output-directory: ${{ github.workspace }}/.valint
 
       - name: Set Stage 2
         run: |
@@ -73,7 +72,6 @@ jobs:
             product-version: ${{ env.PRODUCT_VERSION }}
             target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
-            output-directory: ${{ github.workspace }}/.valint
 
       - name: Verify Action
         uses: scribe-security/action-verify@master
@@ -81,4 +79,3 @@ jobs:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
-            output-directory: ${{ github.workspace }}/.valint
