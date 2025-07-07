@@ -76,7 +76,6 @@ jobs:
       - name: Verify Action
         uses: scribe-security/action-verify@master
         with:
-            target: ${{ env.STAGE }} # Remove this line after fixing the action
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
@@ -85,7 +84,6 @@ jobs:
       - name: Verify-CLI Action
         uses: scribe-security/action-verify-cli@master
         with:
-            target: ${{ env.STAGE }} # Remove this line after fixing the action
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
             initiative: policies/stages.yml
