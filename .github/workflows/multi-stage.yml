@@ -1,13 +1,15 @@
 name: Multi-Stage Evidence and Verification Workflow
 on:
   workflow_dispatch:
+  # push:
 
 env:
   PRODUCT_NAME: "Astro-Analytics"
+#   SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
 
 
 jobs:
-  build-pipeline:
+  demo-stage-verification:
     runs-on: ubuntu-latest
     permissions:    
       id-token: write
@@ -42,27 +44,39 @@ jobs:
           echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_OUTPUT
 
       - name: Set Stage 1
-        run: 
-            STAGE="stage 1"
-            echo $STAGE >> $GITHUB_ENV
-            ehco $STAGE >> /var/$STAGE
+        run: |
+            set -e
+            STAGE="stage_1"
+            echo "STAGE=$STAGE" >> $GITHUB_ENV
+            echo $STAGE >> "$STAGE"
+            cat "$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
-            target: /var/${{ env.STAGE }}
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{ env.PRODUCT_VERSION }}
+            target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
       - name: Set Stage 2
-        run: 
-            STAGE="stage 2"
-            echo $STAGE >> $GITHUB_ENV
-            ehco $STAGE >> /var/$STAGE
+        run: |
+            STAGE="stage_2"
+            echo "STAGE=$STAGE" >> $GITHUB_ENV
+            echo $STAGE >> "$STAGE"
 
       - name: Evidence
         uses: scribe-security/action-evidence@v2.0.0
         with:
-            target: /var/${{ env.STAGE }}
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{ env.PRODUCT_VERSION }}
+            target: ${{ env.STAGE }}
             label: stage=${{ env.STAGE }}
 
-            
+      - name: Verify Action
+        uses: scribe-security/action-verify@master
+        with:
+            product-key: ${{ env.PRODUCT_NAME }}
+            product-version: ${{ env.PRODUCT_VERSION }}
+            initiative: policies/stages.yml
+            beautify: true
