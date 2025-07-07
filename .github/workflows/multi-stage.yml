@@ -52,7 +52,7 @@ jobs:
             cat "$STAGE"
 
       - name: Evidence
-        uses: scribe-security/action-evidence@v2.0.0
+        uses: scribe-security/action-evidence-cli@v2.0.0
         with:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
@@ -67,7 +67,7 @@ jobs:
             echo $STAGE >> "$STAGE"
 
       - name: Evidence
-        uses: scribe-security/action-evidence@v2.0.0
+        uses: scribe-security/action-evidence-cli@v2.0.0
         with:
             product-key: ${{ env.PRODUCT_NAME }}
             product-version: ${{ env.PRODUCT_VERSION }}
@@ -75,13 +75,13 @@ jobs:
             label: stage=${{ env.STAGE }}
             output-directory: ${{ github.workspace }}/.valint
 
-      - name: Verify Action
-        uses: scribe-security/action-verify@master
-        with:
-            product-key: ${{ env.PRODUCT_NAME }}
-            product-version: ${{ env.PRODUCT_VERSION }}
-            initiative: policies/stages.yml
-            output-directory: ${{ github.workspace }}/.valint
+      # - name: Verify Action
+      #   uses: scribe-security/action-verify@master
+      #   with:
+      #       product-key: ${{ env.PRODUCT_NAME }}
+      #       product-version: ${{ env.PRODUCT_VERSION }}
+      #       initiative: policies/stages.yml
+      #       output-directory: ${{ github.workspace }}/.valint
 
       - name: Verify-CLI Action
         uses: scribe-security/action-verify-cli@master
