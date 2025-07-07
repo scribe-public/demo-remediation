@@ -4,8 +4,8 @@ on:
   # push:
 
 env:
-  PRODUCT_NAME: "Astro-Analytics"
-#   SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+  PRODUCT_NAME: "Astrolabe"
+  SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
 
 
 jobs:
