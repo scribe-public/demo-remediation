@@ -66,6 +66,7 @@ jobs:
         with:
           command: bom
           platform: github
+          log-level: DEBUG
           args: >-
             --token ${{ env.GITHUB_EXTERNAL_TOKEN}}
             --organization.mapping *${{ github.repository_owner}}::${{env.PRODUCT_NAME}}::${{ env.PRODUCT_VERSION }}
