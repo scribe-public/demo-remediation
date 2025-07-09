@@ -134,7 +134,7 @@ controls:
           entering the supply chain.
         with:
           approved_sources: []
-            # - "index.docker.io/library/python.*slim"
+            "index.docker.io/library/node.*"
             # - "index.docker.io/library/my_company/base.*"
 
       - uses: images/allowed-image-source@v2
@@ -146,7 +146,8 @@ controls:
           using malicious or compromised images.
         with:
           approved_sources: []
-            # - "index.docker.io/library/nginx:.*"
+            - "index.docker.io/library/.*"
+            - "ghcr.io/scribe-public/.*"
             # - "index.docker.io/library/my_company/.*"
 
       - uses: images/image-signed@v2
