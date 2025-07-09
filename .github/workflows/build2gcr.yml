@@ -38,21 +38,21 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}
 
 
-      # - name: Create and Upload SBOM verify SLSA
-      #   uses: scribe-security/action-verify@master
-      #   env: 
-      #       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
-      #   with:
-      #     target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
-      #     bom: true
-      #     provenance: true
-      #     product-key: ${{ env.PRODUCT_NAME }}
-      #     product-version: ${{ env.PRODUCT_VERSION }}
-      #     base-image: Dockerfile
-      #     components: files
-      #     format: attest
-      #     initiative: slsa.l2@v2
-      #     beautify: true
+      - name: Create and Upload SBOM verify SLSA
+        uses: scribe-security/action-verify@master
+        env: 
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+        with:
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+          bom: true
+          provenance: true
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
+          base-image: Dockerfile
+          # components: files
+          format: attest
+          initiative: slsa.l2@v2
+          beautify: true
 
       # - name: verify-ssdf
       #   if: always()
@@ -69,19 +69,19 @@ jobs:
       #     initiative: ssdf@v2
       #     beautify: true
         
-      - name: verify-sp800-190
-        uses: scribe-security/action-verify@dev
-        if: always()
-        continue-on-error: true # Also makes the step not fail i guessing
-        env: 
-            SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
-        with:
-          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
-          product-key: ${{ env.PRODUCT_NAME }}
-          product-version: ${{ env.PRODUCT_VERSION }}
-          base-image: Dockerfile
-          # input: trivy:trivy-report.json # 2DO Scribe CVE rule to initiative willr replace this requriement.
-          format: attest
-          initiative: sp-800-190@v2
-          beautify: true
-          # exit-code: 0
+      # - name: verify-sp800-190
+      #   uses: scribe-security/action-verify@dev
+      #   if: always()
+      #   continue-on-error: true # Also makes the step not fail i guessing
+      #   env: 
+      #       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+      #   with:
+      #     target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+      #     product-key: ${{ env.PRODUCT_NAME }}
+      #     product-version: ${{ env.PRODUCT_VERSION }}
+      #     base-image: Dockerfile
+      #     # input: trivy:trivy-report.json # 2DO Scribe CVE rule to initiative willr replace this requriement.
+      #     format: attest
+      #     initiative: sp-800-190@v2
+      #     beautify: true
+      #     # exit-code: 0
