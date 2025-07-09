@@ -62,7 +62,7 @@ jobs:
             --hook trivy_iac_and_secrets
             
       - name: BOM Github
-        uses: scribe-security/action-platforms@master
+        uses: scribe-security/action-platforms@dev
         with:
           command: bom
           platform: github
