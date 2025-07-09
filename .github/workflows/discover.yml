@@ -2,7 +2,10 @@ name: Discover (agentless) Pipeline
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows: ["Build and Push to GCR"]
+    types:
+      - completed
 
 env:
   PRODUCT_NAME: "Astro-Analytics-Discovery"
