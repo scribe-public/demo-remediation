@@ -3,8 +3,8 @@ name: Build to GCR
 on:
   workflow_dispatch:
   
-  push:
-    # branches: [main]
+  # push:
+  #   branches: [main]
 
 env:
   PRODUCT_NAME: "Astro-Analytics"
