@@ -1,0 +1,103 @@
+name: Evaluate SP800-190
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build and Push to GCR"]
+    types:
+      - completed
+
+env:
+  PRODUCT_NAME: "Astro-Analytics"
+#  PRODUCT_VERSION: ${{ github.run_number }}  --- is set later
+
+jobs: 
+  github-evidence:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Sigstore Signing
+    outputs:
+      product_version: ${{ steps.get_version.outputs.PRODUCT_VERSION }}
+
+    env:
+      GITHUB_EXTERNAL_TOKEN: ${{ secrets.DEMO_GH_SECRET }}
+      SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+      VALINT_VERIFY_BEAUTIFY: true
+      DOCKER_DRIVER: overlay2
+      DOCKER_CONFIG: ${{ github.workspace }}/.docker
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Product Version
+        id: get_version
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Replace with your actual workflow file name
+          WORKFLOW_FILE="build2gcr.yml"
+      
+          # Get workflow ID
+          WORKFLOW_ID=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows | \
+            jq -r ".workflows[] | select(.path == \".github/workflows/${WORKFLOW_FILE}\") | .id")
+      
+          echo "Workflow ID is: $WORKFLOW_ID"
+      
+          # Get the latest successful run number
+          RUN_NUMBER=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/$WORKFLOW_ID/runs?status=success&per_page=1" | \
+            jq -r '.workflow_runs[0].run_number')
+      
+          echo "Latest successful run number is: $RUN_NUMBER"
+
+          echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_ENV
+          echo "PRODUCT_VERSION=$RUN_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Get Repository Base Name
+        run: |
+          # Extract the base name of the repository
+          REPO_BASE_NAME=$(basename ${{ github.repository }})
+          echo "REPO_BASE_NAME=$REPO_BASE_NAME" >> $GITHUB_ENV
+          
+
+      - name: Sign in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DEMO_GH_SECRET }}
+
+      - name: Collect evidence & evaluate policy
+        uses: scribe-security/action-verify@master
+        with:
+          initiative: policies/sp-800-190.yml
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+          bom: true
+          base-image: Dockerfile
+          input: sarif:trivy-report.json
+          input-format: attest
+          format: attest
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
+          beautify: true
+          verbose: 2
+        env:
+          SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+          SCRIBE_URL: ${{ env.SCRIBE_URL }}
+          DEBUG: true
+
+      # ── always publish artifacts ───────────────────────────────────
+      - name: Upload evidence bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence
+          path: |
+            evidence
+            trivy-report.json
+          retention-days: 7
+
+    
