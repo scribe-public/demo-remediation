@@ -1,6 +1,9 @@
 name: Evaluate OWASP-TOP10-CICD-SC
 
 on:
+  push:
+    branches:
+      - owasp-top10-cicd
   workflow_dispatch:
   workflow_run:
     workflows: ["Build and Push to GCR"]
