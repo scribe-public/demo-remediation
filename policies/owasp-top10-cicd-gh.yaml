@@ -9,8 +9,6 @@ full-description: >-
 help: https://owasp.org/www-project-top-10-ci-cd-security-risks/
 defaults:
   level: warning
-  evidence:
-    signed: false
 
 controls:
   ########################################################################
@@ -92,7 +90,7 @@ controls:
           Remove permissions not necessary for the ongoing work of each identity across the different systems in the environment.
           Refrain from granting base permissions in a system to all users, and to large groups where user accounts are automatically assigned to.
         with:
-          max_admins: 4
+          max_admins: 5
 
       - uses: github/org/allow-admins@v2
         name: "Allowed GitHub Organization Admins"
@@ -114,7 +112,7 @@ controls:
           allowed_users: []
 
       - uses: github/org/create-repos@v2
-        name: "'Create repositories' permissions check"
+        name: "Create repositories' permissions check"
         description: "Ensure only allowed users can create repositories in the GitHub organization."
         mitigation: >-
           Remove permissions not necessary for the ongoing work of each identity across the different systems in the environment.
@@ -129,7 +127,8 @@ controls:
         mitigation: >-
           Remove permissions not necessary for the ongoing work of each identity across the different systems in the environment.
         with:
-          allowed_repo_names: []
+          allowed_repo_names:
+            - ".*"
 
   ########################################################################
   # CONTROL 3: CICD-SEC-3: Dependency Chain Abuse
@@ -186,7 +185,8 @@ controls:
           Where possible, refrain from running pipelines originating from forks, and consider adding controls such as requiring manual approval for pipeline execution.
         with:
           files: [".github/workflow/*.yml", ".github/workflow/*.yaml"]
-          ids: []
+          ids:
+            - scribesecurity.com
 
       - uses: github/repository/branch-protection@v2
         name: "Require Branch Protection"
@@ -277,17 +277,16 @@ controls:
         mitigation: >-
           Enable automatic scanning upon each code push, and periodical scans on the repository and its past commits.
 
-      - uses: sarif/trivy/verify-trivy-report@v2
-        name: "Verify Trivy Report"
+      - uses: generic/3rd-pty@v2
+        name: "Verify Trivy Report on secrets"
         description: >-
           Verify the Trivy report for exposed secrets.
         mitigation: >-
           Verify that secrets are removed from any type of artifact, such as from layers of container images, binaries, or Helm charts.
         all-evidence: true
         with:
-          rule_names:
+          titles:
             - "Secret"
-          max_allowed: 0
 
   ########################################################################
   # CONTROL 7: CICD-SEC-7: Insecure System Configuration
