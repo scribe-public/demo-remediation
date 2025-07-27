@@ -277,7 +277,7 @@ controls:
         mitigation: >-
           Enable automatic scanning upon each code push, and periodical scans on the repository and its past commits.
 
-      - uses: generic/3rd-pty@v2
+      - uses: sarif/trivy/verify-trivy-report@v2
         id: trivy-secret-scan
         name: "Verify Trivy Secret Scan Report"
         description: >-
@@ -285,10 +285,12 @@ controls:
         mitigation: >-
           Verify that secrets are removed from any type of artifact, such as from layers of container images, binaries, or Helm charts.
         evidence:
-          parser: Trivy
+          tool: trivy
+        all-evidence: true
         with:
-          titles:
+          rule_names:
             - "Secret"
+          max_allowed: 0
 
   ########################################################################
   # CONTROL 7: CICD-SEC-7: Insecure System Configuration
