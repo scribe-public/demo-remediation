@@ -112,7 +112,7 @@ controls:
           allowed_users: []
 
       - uses: github/org/create-repos@v2
-        name: "Create repositories' permissions check"
+        name: "'Create repositories' permissions check"
         description: "Ensure only allowed users can create repositories in the GitHub organization."
         mitigation: >-
           Remove permissions not necessary for the ongoing work of each identity across the different systems in the environment.
@@ -278,12 +278,14 @@ controls:
           Enable automatic scanning upon each code push, and periodical scans on the repository and its past commits.
 
       - uses: generic/3rd-pty@v2
-        name: "Verify Trivy Report on secrets"
+        id: trivy-secret-scan
+        name: "Verify Trivy Secret Scan Report"
         description: >-
           Verify the Trivy report for exposed secrets.
         mitigation: >-
           Verify that secrets are removed from any type of artifact, such as from layers of container images, binaries, or Helm charts.
-        all-evidence: true
+        evidence:
+          parser: Trivy
         with:
           titles:
             - "Secret"
