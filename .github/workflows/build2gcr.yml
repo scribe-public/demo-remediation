@@ -46,9 +46,13 @@ jobs:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
           bom: true
           provenance: true
+          base-image: Dockerfile
+          source: 'git:.'
+          source-asset-id: ${{ github.repository }}
+          source-asset-name: ${{ env.REPO_BASE_NAME}}
+          source-asset-platform: github
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
-          base-image: Dockerfile
           # components: files
           format: attest
           initiative: slsa.l2@v2
