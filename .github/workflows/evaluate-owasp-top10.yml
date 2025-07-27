@@ -1,9 +1,6 @@
 name: Evaluate OWASP-TOP10-CICD-SC
 
 on:
-  push:
-    branches:
-      - owasp-top10-cicd
   workflow_dispatch:
   workflow_run:
     workflows: ["Build and Push to GCR"]
@@ -94,22 +91,35 @@ jobs:
 # -- slsa-enable
 # --scope.workflow.name *Build*
 
-      - name: Collect evidence & evaluate policy
+      - name: Evaluate SLSA.L2 # here we create all necessary attestations for OWASP TOP 10 CI/CD
         uses: scribe-security/action-verify@master
         with:
-          initiative: policies/owasp-top10-cicd-gh.yaml
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+          initiative: slsa.l2@v2
           bom: true
           provenance: true
+          base-image: Dockerfile
           source: 'git:.'
           source-asset-id: ${{ github.repository }}
           source-asset-name: ${{ env.REPO_BASE_NAME}}
           source-asset-platform: github
-          base-image: Dockerfile
           format: attest
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
+          beautify: true
+        env:
+          SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+          SCRIBE_URL: ${{ env.SCRIBE_URL }}
+          DEBUG: true
+
+      - name: Evaluate OWASP TOP 10 CI/CD
+        uses: scribe-security/action-verify@master
+        with:
+          initiative: policies/owasp-top10-cicd-gh.yaml
           bundle-branch: owasp-top10-cicd-sc
+          format: attest
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
           all-evidence: true
           beautify: true
           md: valint.md
