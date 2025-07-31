@@ -89,6 +89,7 @@ jobs:
             --scope.workflow.past_days 2
             --scope.branch ${{ github.ref_name }}
             --hook trivy_iac_and_secrets_sarif
+            -f
 
 #  --scope.workflow.analyzed_logs
 # -- slsa-enable
