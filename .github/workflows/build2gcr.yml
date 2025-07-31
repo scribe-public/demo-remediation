@@ -37,18 +37,42 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/astro-analytics:latest
             ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}
 
-
-      - name: Create and Upload SBOM verify SLSA
-        uses: scribe-security/action-verify@master
-        env: 
+      - name: Create and Upload Image SBOM
+        uses: scribe-security/action-bom@master
+        env:
             SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
         with:
           target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
-          bom: true
+          base-image: Dockerfile
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
+          # components: files
+          format: attest
+
+      - name: Create and Upload Git SBOM
+        uses: scribe-security/action-bom@master
+        env:
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+        with:
+          target: 'git:.'
+          asset-type: repo
+          asset-id: ${{ github.repository }}
+          asset-name: ${{ env.REPO_BASE_NAME}}
+          asset-platform: github
+          product-key: ${{ env.PRODUCT_NAME }}
+          product-version: ${{ env.PRODUCT_VERSION }}
+          # components: files
+          format: attest
+
+      - name: Create and verify SLSA
+        uses: scribe-security/action-verify@master
+        env:
+            SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
+        with:
+          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
           provenance: true
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
-          base-image: Dockerfile
           # components: files
           format: attest
           initiative: slsa.l2@v2
