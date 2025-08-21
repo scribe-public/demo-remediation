@@ -1,21 +1,19 @@
-# Ensure Docker Container Runs as Non-Root User
+# Findings Group Remediation Summary
+
+## Title
+Avoid SQL string concatenation: use SQLAlchemy TextualSQL prepared statements
 
 ## Summary of Common Issues
-The Dockerfile did not specify a non-root USER, causing container processes to run as root and potentially granting elevated privileges inside the container.
+The code concatenates untrusted input directly into raw SQL queries, leading to SQL injection vulnerabilities.
 
 ## Approach
-- Annotated the original `CMD` line in the Dockerfile with a semgrep directive to mark the finding as fixed.
-- Added a `USER node` instruction at the end of the Dockerfile to ensure the container runs with a non-root user.
+- Attempted to locate and remediate the affected code file at `output/clone/scribe-public/demo-remediation/bad-file.py` but it was not found.
 
 ## Modified Files
-- `Dockerfile`
-
-## Testing Performed
-- Built the Docker image locally and confirmed the default container user is `node` by running:
-  ```bash
-  docker build -t demo-remediation .
-  docker run --rm demo-remediation whoami
-  ```
+- `.scribe/fixed-findings-group.json`
+- `.scribe/group_summary.md`
 
 ## Unresolved Findings
-None
+- The file `output/clone/scribe-public/demo-remediation/bad-file.py` could not be located to apply the fix.
+
+Tokens used: 36452
