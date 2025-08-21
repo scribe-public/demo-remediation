@@ -23,7 +23,7 @@
     ],
     "unique_id_from_tool": "0cc3a0834a051dd865e774260a4a1d08e17252e968dee5da76db2f34f86f00fb8146a4bd5f08b59298df7ca40f0cb264f332fd4cf0899cad766b39f2bef4ed5b_0",
     "Remediation": {
-      "fix commit": "https://github.com/scribe-security/prfindings/commit/fdd232f651f6cd0a5889e71dbf6d097ef1b89a1e",
+      "fix commit": "https://github.com/scribe-security/prfindings/commit/02023d92df908c994fcdf830c479d883024333fd",
       "status": "fixed",
       "resolution": "Ensured parameterized query use; removed raw SQL concatenation and validated command execution elsewhere"
     }
