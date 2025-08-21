@@ -1,0 +1,50 @@
+name: Remediate Findings
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  prfindings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create output directory
+        run: mkdir -p ${{ github.workspace }}/prfindings-output
+
+      - name: Make output directory world-writable
+        run: chmod -R 777 ${{ github.workspace }}/prfindings-output
+
+      - name: Fix output directory permissions
+        run: |
+          sudo chown -R 1000:1000 ${{ github.workspace }}/prfindings-output || true
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+
+      - name: Create minimal config.yml and .env
+        run: |
+          echo "${{ secrets.DOTENV_FILE }}" > .env
+
+      - name: Create sample findings file
+        run: |
+          echo '{"_type": "https://in-toto.io/Statement/v0.1", "predicate": {"content": [{"id": "1", "severity": "high"}]}}' > sample_findings.json
+
+      - name: Run prfindings findings processor
+        uses: scribe-security/prfindings-action@main
+        with:
+          config_file: ./config.yml
+          env_file: ./.env
+          output_dir: ${{ github.workspace }}/prfindings-output
+          params_envs: |
+            GITHUB_TOKEN:${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload prfindings output
+        uses: actions/upload-artifact@v4
+        with:
+          name: prfindings-output
+          path: ${{ github.workspace }}/prfindings-output

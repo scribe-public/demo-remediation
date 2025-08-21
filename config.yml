@@ -1,0 +1,45 @@
+# Sample Configuration for Findings Processor
+
+# Sources: Define where to download findings files from
+sources:
+  # Get a findings attestation from Scribe
+  - name: "Get Finding from Scribe"
+    type: "function"
+    function_name: "get_scribe_findings"
+    parameters:
+      criteria:
+        name: nautical-analytics-Discovery
+        product_version: '2'
+        predicate_type: http://scribesecurity.com/evidence/finding/v0.1
+        parser: Sarif
+        # labels:
+        #   - platform-hook-name=Opengrep Static Analysis Scan
+
+
+# File Tools: Run on entire findings files
+file_tools:
+  - name: "cleanup"          # Built-in tool for file information
+    command: "rm -rf output/clone/* && sleep 2"
+
+  - name: "initialize_git"
+    strategy: "extract_repo_url_from_findings" # values: use_existing_repo, download_repo, extract_repo_url_from_findings
+
+ # Strategies: all_at_once, file_path, one_by_one
+  - name: "remediate_findings_groups"
+    strategy: "one_by_one"
+    agent: "codex"  # Use 'emulate' for testing process without AI interaction
+    limit: 5
+
+  - name: "create_github_pr"
+    add_pr_link: true
+
+# Post-processing: Commands to run after all tools have processed findings
+post_processing:
+
+  - name: "upload_patched_finding_attestation"
+
+# Global settings
+settings:
+  timeout: 30
+  retry_count: 2
+  retry_delay: 2
