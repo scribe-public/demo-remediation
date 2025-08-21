@@ -55,10 +55,10 @@ jobs:
             SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
         with:
           target: 'git:.'
-          asset-type: repo
-          asset-id: ${{ github.repository }}
-          asset-name: ${{ env.REPO_BASE_NAME}}
-          asset-platform: github
+          # asset-type: repo
+          # asset-id: ${{ github.repository }}
+          # asset-name: ${{ env.REPO_BASE_NAME}}
+          # asset-platform: github
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
           # components: files
