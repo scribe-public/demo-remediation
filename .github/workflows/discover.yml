@@ -8,7 +8,7 @@ on:
       - completed
 
 env:
-  PRODUCT_NAME: "Nautical-Analytics-Discovery"
+  PRODUCT_NAME: "nautical-analytics-Discovery"
 #  PRODUCT_VERSION: ${{ github.run_number }}  --- is set later
 
 jobs: 
@@ -128,9 +128,9 @@ jobs:
   #   needs: github-evidence
   #   uses: scribe-public/reusable-workflows/.github/workflows/k8s-demo.yaml@main
   #   with:
-  #     scribe_product_name: "Nautical-Analytics-Discovery"
+  #     scribe_product_name: "nautical-analytics-Discovery"
   #     scribe_product_version: ${{ needs.github-evidence.outputs.product_version }}
-  #     targets: ghcr.io/${{github.repository_owner}}/Nautical-Analytics:${{ needs.github-evidence.outputs.PRODUCT_VERSION }}
+  #     targets: ghcr.io/${{github.repository_owner}}/nautical-analytics:${{ needs.github-evidence.outputs.PRODUCT_VERSION }}
   #     docker-registry: ghcr.io
   #     sbom: true
   #     k8s_discovery_args: --hook kubescape_cluster,apparmor_namespace
