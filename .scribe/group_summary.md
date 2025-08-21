@@ -26,3 +26,5 @@ Unresolved findings:
 - None. The SQL finding was already using a parameterized query. Command injection and
   secret-in-source have been remediated.
 
+
+Tokens used: 14786

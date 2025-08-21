@@ -1,0 +1,26 @@
+[
+  {
+    "unsaved_vulnerability_ids": null,
+    "unsaved_endpoints": [],
+    "title": "Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query [...]",
+    "severity": "High",
+    "description": "**Result message:** Avoiding SQL string concatenation: untrusted input concatenated with raw SQL query can result in SQL Injection. In order to execute raw query safely, prepared statement should be used. SQLAlchemy provides TextualSQL to easily used prepared statement with named parameters. For complex SQL composition, use SQL Expression Language or Schema Definition Language. In most cases, SQLAlchemy ORM will be a better option.\n**Snippet:**\n```\ncursor.execute(query)\n```\n**Rule name:** python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query\n**Rule short description:** Opengrep Finding: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+    "static_finding": true,
+    "dynamic_finding": false,
+    "false_p": false,
+    "active": true,
+    "file_path": "output/clone/scribe-public/demo-remediation/bad-file.py",
+    "line": 16,
+    "references": "https://semgrep.dev/r/python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+    "vuln_id_from_tool": "python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query",
+    "cwe": 89,
+    "tags": [
+      "LOW CONFIDENCE",
+      "OWASP-A01:2017 - Injection",
+      "OWASP-A03:2021 - Injection",
+      "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
+      "security"
+    ],
+    "unique_id_from_tool": "0cc3a0834a051dd865e774260a4a1d08e17252e968dee5da76db2f34f86f00fb8146a4bd5f08b59298df7ca40f0cb264f332fd4cf0899cad766b39f2bef4ed5b_0"
+  }
+]
