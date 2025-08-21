@@ -7,7 +7,7 @@ on:
   #   branches: [main]
 
 env:
-  PRODUCT_NAME: "Astro-Analytics"
+  PRODUCT_NAME: "Nautical-Analytics"
   PRODUCT_VERSION: ${{ github.run_number}}  # Set your version here
 
 jobs:
@@ -34,15 +34,15 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/astro-analytics:latest
-            ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}
+            ghcr.io/${{ github.repository_owner }}/Nautical-Analytics:latest
+            ghcr.io/${{ github.repository_owner }}/Nautical-Analytics:${{ env.PRODUCT_VERSION }}
 
       - name: Create and Upload Image SBOM
         uses: scribe-security/action-bom@master
         env:
             SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
         with:
-          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+          target: "ghcr.io/${{ github.repository_owner }}/Nautical-Analytics:${{ env.PRODUCT_VERSION }}"
           base-image: Dockerfile
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
@@ -69,7 +69,7 @@ jobs:
         env:
             SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
         with:
-          target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+          target: "ghcr.io/${{ github.repository_owner }}/Nautical-Analytics:${{ env.PRODUCT_VERSION }}"
           provenance: true
           product-key: ${{ env.PRODUCT_NAME }}
           product-version: ${{ env.PRODUCT_VERSION }}
@@ -84,7 +84,7 @@ jobs:
       #   env: 
       #       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
       #   with:
-      #     target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+      #     target: "ghcr.io/${{ github.repository_owner }}/Nautical-Analytics:${{ env.PRODUCT_VERSION }}"
       #     product-key: ${{ env.PRODUCT_NAME }}
       #     product-version: ${{ env.PRODUCT_VERSION }}
       #     base-image: Dockerfile
@@ -100,7 +100,7 @@ jobs:
       #   env: 
       #       SCRIBE_TOKEN: ${{ secrets.SCRIBE_TOKEN }}
       #   with:
-      #     target: "ghcr.io/${{ github.repository_owner }}/astro-analytics:${{ env.PRODUCT_VERSION }}"
+      #     target: "ghcr.io/${{ github.repository_owner }}/Nautical-Analytics:${{ env.PRODUCT_VERSION }}"
       #     product-key: ${{ env.PRODUCT_NAME }}
       #     product-version: ${{ env.PRODUCT_VERSION }}
       #     base-image: Dockerfile

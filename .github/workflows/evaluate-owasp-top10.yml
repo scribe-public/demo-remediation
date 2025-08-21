@@ -11,7 +11,7 @@ on:
       - completed
 
 env:
-  PRODUCT_NAME: "Astro-Analytics"
+  PRODUCT_NAME: "Nautical-Analytics"
 #  PRODUCT_VERSION: ${{ github.run_number }}  --- is set later
 
 jobs:
