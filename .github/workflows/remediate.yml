@@ -78,8 +78,8 @@ jobs:
           config_file: ./config.yml
           env_file: ./.env
           output_dir: ${{ github.workspace }}/prfindings-output
-          params_envs: |
-            GITHUB_TOKEN:${{ secrets.GITHUB_TOKEN }}
+          # params_envs: |
+          #   GITHUB_TOKEN:${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload prfindings output
         uses: actions/upload-artifact@v4
