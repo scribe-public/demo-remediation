@@ -11,7 +11,7 @@ sources:
         name: nautical-analytics-Discovery
         product_version: 'PRODUCT_VERSION'
         predicate_type: http://scribesecurity.com/evidence/finding/v0.1
-        parser: Sarif
+        # parser: Sarif
         # labels:
         #   - platform-hook-name=Opengrep Static Analysis Scan
 
