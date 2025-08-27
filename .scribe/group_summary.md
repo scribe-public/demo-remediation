@@ -17,3 +17,5 @@
 
 ## Unresolved Findings
 - None — the finding is addressed by running as a non-root user.
+
+Tokens used: 1502
