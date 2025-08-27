@@ -52,6 +52,8 @@ file_tools:
 
 # Post-processing: Commands to run after all tools have processed findings
 post_processing:
+  - name: "do anything"
+    command: "echo 'Doing anything'"
 
   # - name: "upload_patched_finding_attestation"
 
