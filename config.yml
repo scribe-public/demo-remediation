@@ -2,18 +2,28 @@
 
 # Sources: Define where to download findings files from
 sources:
+
+
+  - name: "Finding Attestation File"
+    type: "file"
+    url: "data/PRFinding_finding_attestation.json"
+
+  # - name: "Get Future Path"
+  #   type: "future_path"
+  #   path: "data/finding_attestation.json"
+
   # Get a findings attestation from Scribe
-  - name: "Get Finding from Scribe"
-    type: "function"
-    function_name: "get_scribe_findings"
-    parameters:
-      criteria:
-        name: nautical-analytics-Discovery
-        product_version: 'PRODUCT_VERSION'
-        predicate_type: http://scribesecurity.com/evidence/finding/v0.1
-        # parser: Sarif
-        # labels:
-        #   - platform-hook-name=Opengrep Static Analysis Scan
+  # - name: "Get Finding from Scribe"
+  #   type: "function"
+  #   function_name: "get_scribe_findings"
+  #   parameters:
+  #     criteria:
+  #       name: nautical-analytics-Discovery
+  #       product_version: 'PRODUCT_VERSION'
+  #       predicate_type: http://scribesecurity.com/evidence/finding/v0.1
+  #       parser: Sarif
+  #       # labels:
+  #       #   - platform-hook-name=Opengrep Static Analysis Scan
 
 
 # File Tools: Run on entire findings files
