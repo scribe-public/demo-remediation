@@ -21,6 +21,12 @@ file_tools:
   - name: "cleanup"          # Built-in tool for file information
     command: "rm -rf output/clone/* && sleep 2"
 
+  - name: "check valint"
+    command: "valint -h"
+
+  - name: "find valint"
+    command: "which valint || echo $PATH"
+
   - name: "initialize_git"
     strategy: "download_repo" # values: use_existing_repo, download_repo, extract_repo_url_from_findings
     repo_url: "https://github.com/scribe-public/demo-remediation.git"
