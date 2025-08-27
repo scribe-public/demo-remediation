@@ -79,7 +79,7 @@ jobs:
           env_file: ./.env
           output_dir: ${{ github.workspace }}/prfindings-output
           params_envs: |
-            GITHUB_TOKEN:${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN:${{ secrets.DEMO_GH_SECRET }}
 
       - name: Upload prfindings output
         uses: actions/upload-artifact@v4
