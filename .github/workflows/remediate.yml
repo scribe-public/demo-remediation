@@ -51,16 +51,16 @@ jobs:
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
 
-      - name: Create minimal config.yml and .env
-        run: |
-          echo "${{ secrets.DOTENV_FILE }}" > .env
+      # - name: Create minimal config.yml and .env
+      #   run: |
+      #     echo "${{ secrets.DOTENV_FILE }}" > .env
           
-          # Create a sample config.yml file with a PRODUCT_VERSION placeholder
-          cat > config.yml << 'EOL'
-          product:
-            name: "demo-remediation"
-            version: "PRODUCT_VERSION"
-          EOL
+      #     # Create a sample config.yml file with a PRODUCT_VERSION placeholder
+      #     cat > config.yml << 'EOL'
+      #     product:
+      #       name: "demo-remediation"
+      #       version: "PRODUCT_VERSION"
+      #     EOL
           
       - name: Update PRODUCT_VERSION in config.yml
         run: |
