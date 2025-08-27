@@ -32,7 +32,7 @@ file_tools:
     command: "rm -rf output/clone/* && sleep 2"
 
   - name: "check valint"
-    command: "valint -h"
+    command: "/usr/bin/valint -h"
 
   - name: "find valint"
     command: "which valint || echo $PATH"
@@ -42,18 +42,18 @@ file_tools:
     repo_url: "https://github.com/scribe-public/demo-remediation.git"
 
  # Strategies: all_at_once, file_path, one_by_one
-  - name: "remediate_findings_groups"
-    strategy: "one_by_one"
-    agent: "codex"  # Use 'emulate' for testing process without AI interaction
-    limit: 1
+  # - name: "remediate_findings_groups"
+  #   strategy: "one_by_one"
+  #   agent: "codex"  # Use 'emulate' for testing process without AI interaction
+  #   limit: 1
 
-  - name: "create_github_pr"
-    add_pr_link: true
+  # - name: "create_github_pr"
+  #   add_pr_link: true
 
 # Post-processing: Commands to run after all tools have processed findings
 post_processing:
 
-  - name: "upload_patched_finding_attestation"
+  # - name: "upload_patched_finding_attestation"
 
 # Global settings
 settings:
