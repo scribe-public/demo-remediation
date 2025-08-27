@@ -9,7 +9,7 @@ sources:
     parameters:
       criteria:
         name: nautical-analytics-Discovery
-        product_version: '2'
+        product_version: 'PRODUCT_VERSION'
         predicate_type: http://scribesecurity.com/evidence/finding/v0.1
         parser: Sarif
         # labels:
