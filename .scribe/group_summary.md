@@ -17,3 +17,5 @@
 ## Unresolved Findings
 - None. The finding group’s single issue is resolved.
 
+
+Tokens used: 1859
