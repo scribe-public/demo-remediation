@@ -20,6 +20,11 @@
       "security",
       "OWASP-A04:2021 - Insecure Design"
     ],
-    "unique_id_from_tool": "45c1c32ad19ef9fd8608fc4a77be61296f35f89f3cf6cfecad0431e571106069c9bff7b2d5b0b14a2fd1726de7b2672bf65ae05e56ce4bdecf767b05d6594e23_0"
+    "unique_id_from_tool": "45c1c32ad19ef9fd8608fc4a77be61296f35f89f3cf6cfecad0431e571106069c9bff7b2d5b0b14a2fd1726de7b2672bf65ae05e56ce4bdecf767b05d6594e23_0",
+    "Remediation": {
+      "fix commit": "https://github.com/scribe-public/demo-remediation/commit/d277bfb17b65fb71ed3b10602b9acc39324c7906",
+      "status": "fixed",
+      "resolution": "Set USER to non-root 'node' and chowned /app; annotated CMD line"
+    }
   }
 ]
