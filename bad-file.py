@@ -23,7 +23,7 @@ cursor.execute('CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, passw
 username = input("Enter username: ")
 # Use a parameterized query to avoid SQL injection
 query = "SELECT * FROM users WHERE username = ?"
-cursor.execute(query, (username,))  # nosemgrep: python.lang.security.audit.formatted-sql-query.formatted-sql-query # fixed used parameterized query
+cursor.execute(query, (username,))  # nosemgrep: python.lang.security.audit.formatted-sql-query.formatted-sql-query # fixed used parameterized query # nosemgrep: python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query # fixed used parameterized query
 print(cursor.fetchall())
 
 
