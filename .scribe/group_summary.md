@@ -1,27 +1,25 @@
-# Dockerfile: Add non-root user and ownership
+# Finding Group Remediation Summary
 
-## Summary of Common Issues
+## Summary of issues
 
-The findings group identified a Dockerfile that does not specify a `USER`, which allows containers to run as root. This increases the risk that a process compromise inside the container could lead to escalated privileges.
+This group included a finding for a formatted SQL query (risk of SQL injection). The codebase also contained a separate unsafe shell execution example.
 
 ## Approach
 
-- Inspect the `Dockerfile` referenced by the finding.
-- Use the non-root `node` user provided by the base `node:latest` image.
-- Ensure the application directory is owned by that non-root user so it can write runtime files.
-- Annotate the original line flagged by the scanner with the required `nosemgrep` comment.
+- Inspected the reported finding in `.scribe/findings-group.json` and located the vulnerable code in `bad-file.py`.
+- Applied a coordinated fix: replaced the formatted SQL query with a parameterized query and updated command execution to avoid invoking the shell directly.
 
-## Files Modified
+## Files modified
 
-- `Dockerfile` — added `RUN chown -R node:node /app` and `USER node`, and annotated the original CMD line.
-- `.scribe/fixed-findings-group.json` — recorded remediation status and commit link.
+- `bad-file.py` — Replaced `cursor.execute(query)` with a parameterized query and updated shell execution to use `subprocess.run` with `shlex.split`.
+- `.scribe/fixed-findings-group.json` — Marked the finding as `fixed` and added a short remediation note.
 
-## Testing Performed
+## Testing performed
 
-- Basic linting of Dockerfile by visual inspection.
-- Confirmed repository commits were created and include the changes.
+- Ran basic static inspection by opening the modified file to ensure syntax correctness.
+- No automated tests existed for this toy example; changes are small and local.
 
-## Unresolved Findings
+## Unresolved findings
 
-All findings in the group were addressed.
+- None. The SQL formatting finding was addressed. The shell execution issue was also mitigated.
 
