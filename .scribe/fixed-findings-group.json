@@ -22,10 +22,9 @@
     ],
     "unique_id_from_tool": "45c1c32ad19ef9fd8608fc4a77be61296f35f89f3cf6cfecad0431e571106069c9bff7b2d5b0b14a2fd1726de7b2672bf65ae05e56ce4bdecf767b05d6594e23_0",
     "Remediation": {
-      "fix commit": "https://github.com/scribe-security/prfindings/commit/placeholder",
+      "fix commit": "https://github.com/scribe-security/prfindings/commit/603cba563d44d19ce6e44c9f4b22f726d187aeed",
       "status": "fixed",
       "resolution": "Added a non-root USER and adjusted ownership of /app"
     }
   }
 ]
-
