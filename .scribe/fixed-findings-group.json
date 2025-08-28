@@ -21,6 +21,11 @@
       "CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",
       "security"
     ],
-    "unique_id_from_tool": "ab0f117c91c6588dea8aa1a3a167ed9094f6d8492ade388db76f3493d5c346ee4e1512f86493998c36fa7bae0c8b9a90c86ebf2280ed28be6bd7218c62bb19b0_0"
+    "unique_id_from_tool": "ab0f117c91c6588dea8aa1a3a167ed9094f6d8492ade388db76f3493d5c346ee4e1512f86493998c36fa7bae0c8b9a90c86ebf2280ed28be6bd7218c62bb19b0_0",
+    "Remediation": {
+      "fix commit": "TBD",
+      "status": "fixed",
+      "resolution": "Replaced formatted SQL with a parameterized query to prevent SQL injection."
+    }
   }
 ]
