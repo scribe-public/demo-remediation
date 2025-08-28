@@ -42,7 +42,9 @@ file_tools:
   - name: "remediate_findings_groups"
     strategy: "one_by_one"
     agent: "codex"  # Use 'emulate' for testing process without AI interaction
-    limit: 1
+    limit: 5
+    model: gpt-5-mini
+
 
   - name: "create_github_pr"
     add_pr_link: true

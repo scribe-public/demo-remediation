@@ -15,10 +15,7 @@ username = input("Enter username: ")
 query = f"SELECT * FROM users WHERE username = '{username}'"
 cursor.execute(query)
 print(cursor.fetchall())
-# BAD CODE: This is vulnerable to command injection and would fail semgrep security checks
-import os
 
-user_input = input("Enter a shell command: ")
-os.system(user_input)
+
 secret="ghp_abCDefGHijKLmnOPqrSTuvWXyz1234567890"
 
