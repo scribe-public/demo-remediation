@@ -1,0 +1,50 @@
+[
+  {
+    "id": "GHSA-gx6r-qc2v-3p3v",
+    "severity": "Critical",
+    "package": "systeminformation",
+    "currentVersion": "5.3.0",
+    "fixVersion": "5.21.7",
+    "fixState": "fixed",
+    "file": "/package-lock.json",
+    "description": "systeminformation SSID Command Injection Vulnerability",
+    "matchType": "exact-direct-match",
+    "matchFinder": "javascript-matcher"
+  },
+  {
+    "id": "GHSA-2m8v-572m-ff2v",
+    "severity": "High",
+    "package": "systeminformation",
+    "currentVersion": "5.3.0",
+    "fixVersion": "5.3.1",
+    "fixState": "fixed",
+    "file": "/package-lock.json",
+    "description": "Command Injection Vulnerability",
+    "matchType": "exact-direct-match",
+    "matchFinder": "javascript-matcher"
+  },
+  {
+    "id": "GHSA-jff2-qjw8-5476",
+    "severity": "High",
+    "package": "systeminformation",
+    "currentVersion": "5.3.0",
+    "fixVersion": "5.6.4",
+    "fixState": "fixed",
+    "file": "/package-lock.json",
+    "description": "Command Injection Vulnerability in systeminformation",
+    "matchType": "exact-direct-match",
+    "matchFinder": "javascript-matcher"
+  },
+  {
+    "id": "GHSA-cvv5-9h9w-qp2m",
+    "severity": "High",
+    "package": "systeminformation",
+    "currentVersion": "5.3.0",
+    "fixVersion": "5.23.7",
+    "fixState": "fixed",
+    "file": "/package-lock.json",
+    "description": "Systeminformation has command injection vulnerability in getWindowsIEEE8021x (SSID)",
+    "matchType": "exact-direct-match",
+    "matchFinder": "javascript-matcher"
+  }
+]
