@@ -1,0 +1,1167 @@
+[
+  {
+    "vulnerability": {
+      "id": "GHSA-jf85-cpcp-j695",
+      "dataSource": "https://github.com/advisories/GHSA-jf85-cpcp-j695",
+      "namespace": "github:language:javascript",
+      "severity": "Critical",
+      "urls": [],
+      "description": "Prototype Pollution in lodash",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+          "metrics": {
+            "baseScore": 9.1,
+            "exploitabilityScore": 3.9,
+            "impactScore": 5.2
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2019-10744",
+          "epss": 0.0341,
+          "percentile": 0.86966,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "4.17.12"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 3.0860499999999997
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2019-10744",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2019-10744",
+        "namespace": "nvd:cpe",
+        "severity": "Critical",
+        "urls": [
+          "https://access.redhat.com/errata/RHSA-2019:3024",
+          "https://security.netapp.com/advisory/ntap-20191004-0005/",
+          "https://snyk.io/vuln/SNYK-JS-LODASH-450202",
+          "https://support.f5.com/csp/article/K47105354?utm_source=f5support&amp%3Butm_medium=RSS",
+          "https://www.oracle.com/security-alerts/cpujan2021.html",
+          "https://www.oracle.com/security-alerts/cpuoct2020.html",
+          "https://access.redhat.com/errata/RHSA-2019:3024",
+          "https://security.netapp.com/advisory/ntap-20191004-0005/",
+          "https://snyk.io/vuln/SNYK-JS-LODASH-450202",
+          "https://support.f5.com/csp/article/K47105354?utm_source=f5support&amp%3Butm_medium=RSS",
+          "https://www.oracle.com/security-alerts/cpujan2021.html",
+          "https://www.oracle.com/security-alerts/cpuoct2020.html"
+        ],
+        "description": "Versions of lodash lower than 4.17.12 are vulnerable to Prototype Pollution. The function defaultsDeep could be tricked into adding or modifying properties of Object.prototype using a constructor payload.",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:H",
+            "metrics": {
+              "baseScore": 9.1,
+              "exploitabilityScore": 3.9,
+              "impactScore": 5.2
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "2.0",
+            "vector": "AV:N/AC:L/Au:N/C:N/I:P/A:P",
+            "metrics": {
+              "baseScore": 6.4,
+              "exploitabilityScore": 10,
+              "impactScore": 5
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2019-10744",
+            "epss": 0.0341,
+            "percentile": 0.86966,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "lodash",
+            "version": "4.15.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-jf85-cpcp-j695",
+          "versionConstraint": "<4.17.12 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "4.17.12"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "2c69c41a2b0ce4d4",
+      "name": "lodash",
+      "version": "4.15.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:lodash:lodash:4.15.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/lodash@4.15.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-gx6r-qc2v-3p3v",
+      "dataSource": "https://github.com/advisories/GHSA-gx6r-qc2v-3p3v",
+      "namespace": "github:language:javascript",
+      "severity": "Critical",
+      "urls": [],
+      "description": "systeminformation SSID Command Injection Vulnerability",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+          "metrics": {
+            "baseScore": 9.8,
+            "exploitabilityScore": 3.9,
+            "impactScore": 5.9
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2023-42810",
+          "epss": 0.02061,
+          "percentile": 0.83195,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "5.21.7"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 1.9373400000000003
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2023-42810",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-42810",
+        "namespace": "nvd:cpe",
+        "severity": "Critical",
+        "urls": [
+          "https://github.com/sebhildebrandt/systeminformation/commit/7972565812ccb2a610a22911c54c3446f4171392",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-gx6r-qc2v-3p3v",
+          "https://systeminformation.io/security.html",
+          "https://github.com/sebhildebrandt/systeminformation/commit/7972565812ccb2a610a22911c54c3446f4171392",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-gx6r-qc2v-3p3v",
+          "https://systeminformation.io/security.html"
+        ],
+        "description": "systeminformation is a System Information Library for Node.JS. Versions 5.0.0 through 5.21.6 have a SSID Command Injection Vulnerability. The problem was fixed with a parameter check in version 5.21.7. As a workaround, check or sanitize parameter strings that are passed to `wifiConnections()`, `wifiNetworks()` (string only).",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 9.8,
+              "exploitabilityScore": 3.9,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "security-advisories@github.com",
+            "type": "Secondary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 9.8,
+              "exploitabilityScore": 3.9,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2023-42810",
+            "epss": 0.02061,
+            "percentile": 0.83195,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "systeminformation",
+            "version": "5.3.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-gx6r-qc2v-3p3v",
+          "versionConstraint": ">=5.0.0,<5.21.7 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "5.21.7"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "cd30bba2c2a9783a",
+      "name": "systeminformation",
+      "version": "5.3.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:systeminformation:systeminformation:5.3.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/systeminformation@5.3.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-2m8v-572m-ff2v",
+      "dataSource": "https://github.com/advisories/GHSA-2m8v-572m-ff2v",
+      "namespace": "github:language:javascript",
+      "severity": "High",
+      "urls": [],
+      "description": "Command Injection Vulnerability",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+          "metrics": {
+            "baseScore": 7.8,
+            "exploitabilityScore": 1.9,
+            "impactScore": 5.9
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "knownExploited": [
+        {
+          "cve": "CVE-2021-21315",
+          "vendorProject": "Npm package",
+          "product": "System Information Library for Node.JS",
+          "dateAdded": "2022-01-18",
+          "requiredAction": "Apply updates per vendor instructions.",
+          "dueDate": "2022-02-01",
+          "knownRansomwareCampaignUse": "unknown",
+          "urls": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2021-21315"
+          ],
+          "cwes": [
+            "CWE-78"
+          ]
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2021-21315",
+          "epss": 0.93764,
+          "percentile": 0.99852,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "5.3.1"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 80.325
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2021-21315",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-21315",
+        "namespace": "nvd:cpe",
+        "severity": "High",
+        "urls": [
+          "https://github.com/sebhildebrandt/systeminformation/commit/07daa05fb06f24f96297abaa30c2ace8bfd8b525",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-2m8v-572m-ff2v",
+          "https://lists.apache.org/thread.html/r8afea9a83ed568f2647cccc6d8d06126f9815715ddf9a4d479b26b05%40%3Cissues.cordova.apache.org%3E",
+          "https://security.netapp.com/advisory/ntap-20210312-0007/",
+          "https://www.npmjs.com/package/systeminformation",
+          "https://github.com/sebhildebrandt/systeminformation/commit/07daa05fb06f24f96297abaa30c2ace8bfd8b525",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-2m8v-572m-ff2v",
+          "https://lists.apache.org/thread.html/r8afea9a83ed568f2647cccc6d8d06126f9815715ddf9a4d479b26b05%40%3Cissues.cordova.apache.org%3E",
+          "https://security.netapp.com/advisory/ntap-20210312-0007/",
+          "https://www.npmjs.com/package/systeminformation"
+        ],
+        "description": "The System Information Library for Node.JS (npm package \"systeminformation\") is an open source collection of functions to retrieve detailed hardware, system and OS information. In systeminformation before version 5.3.1 there is a command injection vulnerability. Problem was fixed in version 5.3.1. As a workaround instead of upgrading, be sure to check or sanitize service parameters that are passed to si.inetLatency(), si.inetChecksite(), si.services(), si.processLoad() ... do only allow strings, reject any arrays. String sanitation works as expected.",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 7.8,
+              "exploitabilityScore": 1.9,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "2.0",
+            "vector": "AV:L/AC:L/Au:N/C:P/I:P/A:P",
+            "metrics": {
+              "baseScore": 4.6,
+              "exploitabilityScore": 4,
+              "impactScore": 6.5
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "security-advisories@github.com",
+            "type": "Secondary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:N",
+            "metrics": {
+              "baseScore": 7.1,
+              "exploitabilityScore": 2.6,
+              "impactScore": 4
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "knownExploited": [
+          {
+            "cve": "CVE-2021-21315",
+            "vendorProject": "Npm package",
+            "product": "System Information Library for Node.JS",
+            "dateAdded": "2022-01-18",
+            "requiredAction": "Apply updates per vendor instructions.",
+            "dueDate": "2022-02-01",
+            "knownRansomwareCampaignUse": "unknown",
+            "urls": [
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-21315"
+            ],
+            "cwes": [
+              "CWE-78"
+            ]
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2021-21315",
+            "epss": 0.93764,
+            "percentile": 0.99852,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "systeminformation",
+            "version": "5.3.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-2m8v-572m-ff2v",
+          "versionConstraint": "<5.3.1 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "5.3.1"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "cd30bba2c2a9783a",
+      "name": "systeminformation",
+      "version": "5.3.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:systeminformation:systeminformation:5.3.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/systeminformation@5.3.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-p6mc-m468-83gw",
+      "dataSource": "https://github.com/advisories/GHSA-p6mc-m468-83gw",
+      "namespace": "github:language:javascript",
+      "severity": "High",
+      "urls": [],
+      "description": "Prototype Pollution in lodash",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+          "metrics": {
+            "baseScore": 7.4,
+            "exploitabilityScore": 2.3,
+            "impactScore": 5.2
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2020-8203",
+          "epss": 0.02439,
+          "percentile": 0.84574,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "4.17.19"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 1.8170549999999996
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2020-8203",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2020-8203",
+        "namespace": "nvd:cpe",
+        "severity": "High",
+        "urls": [
+          "https://github.com/lodash/lodash/issues/4874",
+          "https://hackerone.com/reports/712065",
+          "https://security.netapp.com/advisory/ntap-20200724-0006/",
+          "https://www.oracle.com//security-alerts/cpujul2021.html",
+          "https://www.oracle.com/security-alerts/cpuApr2021.html",
+          "https://www.oracle.com/security-alerts/cpuapr2022.html",
+          "https://www.oracle.com/security-alerts/cpujan2022.html",
+          "https://www.oracle.com/security-alerts/cpuoct2021.html",
+          "https://github.com/lodash/lodash/issues/4874",
+          "https://hackerone.com/reports/712065",
+          "https://security.netapp.com/advisory/ntap-20200724-0006/",
+          "https://www.oracle.com//security-alerts/cpujul2021.html",
+          "https://www.oracle.com/security-alerts/cpuApr2021.html",
+          "https://www.oracle.com/security-alerts/cpuapr2022.html",
+          "https://www.oracle.com/security-alerts/cpujan2022.html",
+          "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        ],
+        "description": "Prototype pollution attack when using _.zipObjectDeep in lodash before 4.17.20.",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:H",
+            "metrics": {
+              "baseScore": 7.4,
+              "exploitabilityScore": 2.3,
+              "impactScore": 5.2
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "2.0",
+            "vector": "AV:N/AC:M/Au:N/C:N/I:P/A:P",
+            "metrics": {
+              "baseScore": 5.8,
+              "exploitabilityScore": 8.6,
+              "impactScore": 5
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2020-8203",
+            "epss": 0.02439,
+            "percentile": 0.84574,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "lodash",
+            "version": "4.15.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-p6mc-m468-83gw",
+          "versionConstraint": ">=3.7.0,<4.17.19 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "4.17.19"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "2c69c41a2b0ce4d4",
+      "name": "lodash",
+      "version": "4.15.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:lodash:lodash:4.15.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/lodash@4.15.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-jff2-qjw8-5476",
+      "dataSource": "https://github.com/advisories/GHSA-jff2-qjw8-5476",
+      "namespace": "github:language:javascript",
+      "severity": "High",
+      "urls": [],
+      "description": "Command Injection Vulnerability in systeminformation",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:L/A:H",
+          "metrics": {
+            "baseScore": 8.9,
+            "exploitabilityScore": 2.3,
+            "impactScore": 6
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2021-21388",
+          "epss": 0.00617,
+          "percentile": 0.68982,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "5.6.4"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 0.5059400000000001
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2021-21388",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-21388",
+        "namespace": "nvd:cpe",
+        "severity": "Critical",
+        "urls": [
+          "https://github.com/sebhildebrandt/systeminformation/commit/01ef56cd5824ed6da1c11b37013a027fdef67524",
+          "https://github.com/sebhildebrandt/systeminformation/commit/0be6fcd575c05687d1076d5cd6d75af2ebae5a46",
+          "https://github.com/sebhildebrandt/systeminformation/commit/7922366d707de7f20995fc8e30ac3153636bf35f",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-jff2-qjw8-5476",
+          "https://www.npmjs.com/package/systeminformation",
+          "https://github.com/sebhildebrandt/systeminformation/commit/01ef56cd5824ed6da1c11b37013a027fdef67524",
+          "https://github.com/sebhildebrandt/systeminformation/commit/0be6fcd575c05687d1076d5cd6d75af2ebae5a46",
+          "https://github.com/sebhildebrandt/systeminformation/commit/7922366d707de7f20995fc8e30ac3153636bf35f",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-jff2-qjw8-5476",
+          "https://www.npmjs.com/package/systeminformation"
+        ],
+        "description": "systeminformation is an open source system and OS information library for node.js. A command injection vulnerability has been discovered in versions of systeminformation prior to 5.6.4. The issue has been fixed with a parameter check on user input. Please upgrade to version >= 5.6.4. If you cannot upgrade, be sure to check or sanitize service parameters that are passed to si.inetLatency(), si.inetChecksite(), si.services(), si.processLoad() and other commands. Only allow strings, reject any arrays. String sanitation works as expected.",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 9.8,
+              "exploitabilityScore": 3.9,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "2.0",
+            "vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+            "metrics": {
+              "baseScore": 7.5,
+              "exploitabilityScore": 10,
+              "impactScore": 6.5
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "security-advisories@github.com",
+            "type": "Secondary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:L/A:H",
+            "metrics": {
+              "baseScore": 8.9,
+              "exploitabilityScore": 2.3,
+              "impactScore": 6
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2021-21388",
+            "epss": 0.00617,
+            "percentile": 0.68982,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "systeminformation",
+            "version": "5.3.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-jff2-qjw8-5476",
+          "versionConstraint": "<5.6.4 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "5.6.4"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "cd30bba2c2a9783a",
+      "name": "systeminformation",
+      "version": "5.3.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:systeminformation:systeminformation:5.3.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/systeminformation@5.3.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-35jh-r3h4-6jhm",
+      "dataSource": "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
+      "namespace": "github:language:javascript",
+      "severity": "High",
+      "urls": [],
+      "description": "Command Injection in lodash",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+          "metrics": {
+            "baseScore": 7.2,
+            "exploitabilityScore": 1.3,
+            "impactScore": 5.9
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2021-23337",
+          "epss": 0.00551,
+          "percentile": 0.66975,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "4.17.21"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 0.404985
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2021-23337",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-23337",
+        "namespace": "nvd:cpe",
+        "severity": "High",
+        "urls": [
+          "https://cert-portal.siemens.com/productcert/pdf/ssa-637483.pdf",
+          "https://github.com/lodash/lodash/blob/ddfd9b11a0126db2302cb70ec9973b66baec0975/lodash.js%23L14851",
+          "https://security.netapp.com/advisory/ntap-20210312-0006/",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGFUJIONWEBJARS-1074932",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-1074930",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-1074928",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBLODASH-1074931",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1074929",
+          "https://snyk.io/vuln/SNYK-JS-LODASH-1040724",
+          "https://www.oracle.com//security-alerts/cpujul2021.html",
+          "https://www.oracle.com/security-alerts/cpujan2022.html",
+          "https://www.oracle.com/security-alerts/cpujul2022.html",
+          "https://www.oracle.com/security-alerts/cpuoct2021.html",
+          "https://cert-portal.siemens.com/productcert/pdf/ssa-637483.pdf",
+          "https://github.com/lodash/lodash/blob/ddfd9b11a0126db2302cb70ec9973b66baec0975/lodash.js%23L14851",
+          "https://security.netapp.com/advisory/ntap-20210312-0006/",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGFUJIONWEBJARS-1074932",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARS-1074930",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWER-1074928",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBLODASH-1074931",
+          "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1074929",
+          "https://snyk.io/vuln/SNYK-JS-LODASH-1040724",
+          "https://www.oracle.com//security-alerts/cpujul2021.html",
+          "https://www.oracle.com/security-alerts/cpujan2022.html",
+          "https://www.oracle.com/security-alerts/cpujul2022.html",
+          "https://www.oracle.com/security-alerts/cpuoct2021.html"
+        ],
+        "description": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 7.2,
+              "exploitabilityScore": 1.3,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "2.0",
+            "vector": "AV:N/AC:L/Au:S/C:P/I:P/A:P",
+            "metrics": {
+              "baseScore": 6.5,
+              "exploitabilityScore": 8,
+              "impactScore": 6.5
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "report@snyk.io",
+            "type": "Secondary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 7.2,
+              "exploitabilityScore": 1.3,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2021-23337",
+            "epss": 0.00551,
+            "percentile": 0.66975,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "lodash",
+            "version": "4.15.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-35jh-r3h4-6jhm",
+          "versionConstraint": "<4.17.21 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "4.17.21"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "2c69c41a2b0ce4d4",
+      "name": "lodash",
+      "version": "4.15.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:lodash:lodash:4.15.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/lodash@4.15.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-4xc9-xhrj-v574",
+      "dataSource": "https://github.com/advisories/GHSA-4xc9-xhrj-v574",
+      "namespace": "github:language:javascript",
+      "severity": "High",
+      "urls": [],
+      "description": "Prototype Pollution in lodash",
+      "cvss": [],
+      "epss": [
+        {
+          "cve": "CVE-2018-16487",
+          "epss": 0.00409,
+          "percentile": 0.60407,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "4.17.11"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 0.30674999999999997
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2018-16487",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2018-16487",
+        "namespace": "nvd:cpe",
+        "severity": "Medium",
+        "urls": [
+          "https://hackerone.com/reports/380873",
+          "https://security.netapp.com/advisory/ntap-20190919-0004/",
+          "https://hackerone.com/reports/380873",
+          "https://security.netapp.com/advisory/ntap-20190919-0004/"
+        ],
+        "description": "A prototype pollution vulnerability was found in lodash <4.17.11 where the functions merge, mergeWith, and defaultsDeep can be tricked into adding or modifying properties of Object.prototype.",
+        "cvss": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+            "metrics": {
+              "baseScore": 5.6,
+              "exploitabilityScore": 2.3,
+              "impactScore": 3.4
+            },
+            "vendorMetadata": {}
+          },
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "version": "2.0",
+            "vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+            "metrics": {
+              "baseScore": 6.8,
+              "exploitabilityScore": 8.6,
+              "impactScore": 6.5
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2018-16487",
+            "epss": 0.00409,
+            "percentile": 0.60407,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "lodash",
+            "version": "4.15.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-4xc9-xhrj-v574",
+          "versionConstraint": "<4.17.11 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "4.17.11"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "2c69c41a2b0ce4d4",
+      "name": "lodash",
+      "version": "4.15.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:lodash:lodash:4.15.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/lodash@4.15.0",
+      "upstreams": []
+    }
+  },
+  {
+    "vulnerability": {
+      "id": "GHSA-cvv5-9h9w-qp2m",
+      "dataSource": "https://github.com/advisories/GHSA-cvv5-9h9w-qp2m",
+      "namespace": "github:language:javascript",
+      "severity": "High",
+      "urls": [],
+      "description": "Systeminformation has command injection vulnerability in getWindowsIEEE8021x (SSID)",
+      "cvss": [
+        {
+          "type": "Secondary",
+          "version": "3.1",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+          "metrics": {
+            "baseScore": 7.8,
+            "exploitabilityScore": 1.9,
+            "impactScore": 5.9
+          },
+          "vendorMetadata": {}
+        }
+      ],
+      "epss": [
+        {
+          "cve": "CVE-2024-56334",
+          "epss": 0.00271,
+          "percentile": 0.50269,
+          "date": "2025-08-31"
+        }
+      ],
+      "fix": {
+        "versions": [
+          "5.23.7"
+        ],
+        "state": "fixed"
+      },
+      "advisories": [],
+      "risk": 0.20731500000000003
+    },
+    "relatedVulnerabilities": [
+      {
+        "id": "CVE-2024-56334",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2024-56334",
+        "namespace": "nvd:cpe",
+        "severity": "High",
+        "urls": [
+          "https://github.com/sebhildebrandt/systeminformation/commit/f7af0a67b78e7894335a6cad510566a25e06ae41",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-cvv5-9h9w-qp2m",
+          "https://github.com/sebhildebrandt/systeminformation/security/advisories/GHSA-cvv5-9h9w-qp2m"
+        ],
+        "description": "systeminformation is a System and OS information library for node.js. In affected versions SSIDs are not sanitized when before they are passed as a parameter to cmd.exe in the `getWindowsIEEE8021x` function. This means that malicious content in the SSID can be executed as OS commands. This vulnerability may enable an attacker, depending on how the package is used, to perform remote code execution or local privilege escalation. This issue has been addressed in version 5.23.7 and all users are advised to upgrade. There are no known workarounds for this vulnerability.",
+        "cvss": [
+          {
+            "source": "security-advisories@github.com",
+            "type": "Secondary",
+            "version": "3.1",
+            "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "metrics": {
+              "baseScore": 7.8,
+              "exploitabilityScore": 1.9,
+              "impactScore": 5.9
+            },
+            "vendorMetadata": {}
+          }
+        ],
+        "epss": [
+          {
+            "cve": "CVE-2024-56334",
+            "epss": 0.00271,
+            "percentile": 0.50269,
+            "date": "2025-08-31"
+          }
+        ]
+      }
+    ],
+    "matchDetails": [
+      {
+        "type": "exact-direct-match",
+        "matcher": "javascript-matcher",
+        "searchedBy": {
+          "language": "javascript",
+          "namespace": "github:language:javascript",
+          "package": {
+            "name": "systeminformation",
+            "version": "5.3.0"
+          }
+        },
+        "found": {
+          "vulnerabilityID": "GHSA-cvv5-9h9w-qp2m",
+          "versionConstraint": "<=5.23.6 (unknown)"
+        },
+        "fix": {
+          "suggestedVersion": "5.23.7"
+        }
+      }
+    ],
+    "artifact": {
+      "id": "cd30bba2c2a9783a",
+      "name": "systeminformation",
+      "version": "5.3.0",
+      "type": "npm",
+      "locations": [
+        {
+          "path": "/package-lock.json",
+          "accessPath": "/package-lock.json",
+          "annotations": {
+            "evidence": "primary"
+          }
+        }
+      ],
+      "language": "javascript",
+      "licenses": [
+        "MIT"
+      ],
+      "cpes": [
+        "cpe:2.3:a:systeminformation:systeminformation:5.3.0:*:*:*:*:node.js:*:*"
+      ],
+      "purl": "pkg:npm/systeminformation@5.3.0",
+      "upstreams": []
+    }
+  }
+]
